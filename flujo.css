@@ -20,70 +20,55 @@ header {
   padding: 2rem;
 }
 
-.grid-flujo {
+.cuadricula {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto auto auto;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 150px);
   gap: 1rem;
   padding: 2rem;
-  align-items: center;
-  justify-items: center;
 }
 
 .bloque {
   background-color: var(--verde-claro);
   border-left: 10px solid var(--amarillo);
   padding: 1rem;
-  width: 90%;
-  max-width: 300px;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.eoi {
-  grid-row: 2;
-  grid-column: 1;
+.vacio {
+  background-color: transparent;
 }
 
-.puntuales {
-  grid-row: 1;
-  grid-column: 2;
-}
-
-.profundidad {
-  grid-row: 3;
-  grid-column: 2;
-}
-
-.itinerario {
-  grid-row: 2;
-  grid-column: 2;
-}
-
-.desarrollo {
-  grid-row: 2;
-  grid-column: 3;
-}
-
-.conector-centro {
-  grid-row: 2;
-  grid-column: 2;
+.flecha {
   position: relative;
-  height: 100px;
-  width: 100%;
 }
 
-.flecha-diagonal {
+.flecha-eoi-itinerario::before {
+  content: "";
   position: absolute;
-  top: 0;
+  top: -150px;
   left: 50%;
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 20px solid var(--azul);
-  transform: translateX(-50%) rotate(90deg);
+  transform: translateX(-50%);
+  width: 2px;
+  height: 300px;
+  background-color: var(--azul);
+}
+
+.flecha-eoi-itinerario::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 12px solid var(--azul);
 }
 
 footer {
@@ -92,4 +77,3 @@ footer {
   padding: 1rem;
   color: #333;
 }
-
