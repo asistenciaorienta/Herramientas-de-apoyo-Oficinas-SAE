@@ -1,0 +1,74 @@
+/* Colores SAE */
+:root {
+  --verde-sae: #007A33;
+  --gris-claro: #f4f4f4;
+  --azul-acento: #005C99;
+  --texto: #333;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  background-color: var(--gris-claro);
+  color: var(--texto);
+}
+
+header {
+  background-color: var(--verde-sae);
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img {
+  height: 50px;
+  margin-right: 1rem;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.hero {
+  background-color: white;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.boton {
+  background-color: var(--azul-acento);
+  color: white;
+  padding: 0.8rem 1.2rem;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+section {
+  padding: 2rem;
+}
+
+.diagrama {
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 2rem;
+  margin-top: 1rem;
+}
+
+footer {
+  background-color: var(--verde-sae);
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
