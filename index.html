@@ -4,43 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flujo de Orientación SAE</title>
-  <link rel="stylesheet" href="flujo.css">
+  <link rel="stylesheet" href="flujo-cuadricula.css">
 </head>
 <body>
   <header>
     <h1>Flujo de Orientación Técnica</h1>
-    <p>Modelo funcional para personal técnico del SAE</p>
+    <p>Disposición en cuadrícula 4x3 con enlaces visuales</p>
   </header>
 
-  <main class="grid-flujo">
-    <div class="bloque eoi">
-      <h2>🟡 EOI</h2>
-      <p>Entrevista de Orientación Inicial</p>
-    </div>
+  <main class="cuadricula">
+    <!-- Fila 1 -->
+    <div class="vacio"></div>
+    <div class="bloque eoi">🟡<br><strong>EOI</strong><br>Entrevista Inicial</div>
+    <div class="vacio"></div>
+    <div class="vacio"></div>
 
-    <div class="bloque puntuales">
-      <h2>🔹 Servicios Puntuales</h2>
-      <p>Acciones rápidas</p>
-    </div>
+    <!-- Fila 2 -->
+    <div class="bloque puntuales">🔹<br><strong>Servicios Puntuales</strong></div>
+    <div class="flecha flecha-eoi-itinerario"></div>
+    <div class="bloque profundidad">🔸<br><strong>Entrevista en Profundidad</strong></div>
+    <div class="vacio"></div>
 
-    <div class="conector-centro">
-      <div class="flecha flecha-diagonal"></div>
-    </div>
+    <!-- Fila 3 -->
+    <div class="vacio"></div>
+    <div class="bloque itinerario">🟢<br><strong>Diseño de Itinerario</strong></div>
+    <div class="vacio"></div>
+    <div class="vacio"></div>
 
-    <div class="bloque profundidad">
-      <h2>🔸 Entrevista en Profundidad</h2>
-      <p>Análisis detallado</p>
-    </div>
-
-    <div class="bloque itinerario">
-      <h2>🟢 Diseño de Itinerario</h2>
-      <p>Plan personalizado</p>
-    </div>
-
-    <div class="bloque desarrollo">
-      <h2>🔘 Desarrollo de Servicios</h2>
-      <p>Formación, intermediación</p>
-    </div>
+    <!-- Fila 4 -->
+    <div class="vacio"></div>
+    <div class="bloque desarrollo">🔘<br><strong>Desarrollo de Servicios</strong></div>
+    <div class="vacio"></div>
+    <div class="vacio"></div>
   </main>
 
   <footer>
