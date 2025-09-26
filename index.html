@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flujo de Orientación SAE</title>
-  <link rel="stylesheet" href="flujo.css">
+  <link rel="stylesheet" href="flujo-grid.css">
 </head>
 <body>
   <header>
@@ -12,47 +12,34 @@
     <p>Modelo funcional para personal técnico del SAE</p>
   </header>
 
-  <main class="flujo">
-    <div class="bloque" id="eoi">
-      <h2>🟡 EOI - Entrevista de Orientación Inicial</h2>
-      <p>Primera toma de contacto con la persona usuaria.</p>
+  <main class="grid-flujo">
+    <div class="bloque eoi">
+      <h2>🟡 EOI</h2>
+      <p>Entrevista de Orientación Inicial</p>
     </div>
 
-    <div class="conexiones">
-      <div class="flecha flecha-vertical"></div>
-      <div class="ramas">
-        <div class="flecha flecha-diagonal izquierda"></div>
-        <div class="flecha flecha-diagonal centro"></div>
-        <div class="flecha flecha-diagonal derecha"></div>
-      </div>
+    <div class="bloque puntuales">
+      <h2>🔹 Servicios Puntuales</h2>
+      <p>Acciones rápidas</p>
     </div>
 
-    <div class="bloques-secundarios">
-      <div class="bloque" id="puntuales">
-        <h2>🔹 Servicios Puntuales</h2>
-        <p>Acciones rápidas: renovación, duplicado, inscripción.</p>
-      </div>
-      <div class="bloque" id="profundidad">
-        <h2>🔸 Entrevista en Profundidad</h2>
-        <p>Análisis detallado de perfil, competencias y objetivos.</p>
-      </div>
+    <div class="conector-centro">
+      <div class="flecha flecha-diagonal"></div>
     </div>
 
-    <div class="conexiones">
-      <div class="flecha flecha-horizontal izquierda"></div>
-      <div class="flecha flecha-horizontal derecha"></div>
+    <div class="bloque profundidad">
+      <h2>🔸 Entrevista en Profundidad</h2>
+      <p>Análisis detallado</p>
     </div>
 
-    <div class="bloque" id="itinerario">
+    <div class="bloque itinerario">
       <h2>🟢 Diseño de Itinerario</h2>
-      <p>Construcción de un plan personalizado de inserción laboral.</p>
+      <p>Plan personalizado</p>
     </div>
 
-    <div class="flecha flecha-vertical"></div>
-
-    <div class="bloque" id="desarrollo">
+    <div class="bloque desarrollo">
       <h2>🔘 Desarrollo de Servicios</h2>
-      <p>Acceso a formación, intermediación, orientación continua.</p>
+      <p>Formación, intermediación</p>
     </div>
   </main>
 
