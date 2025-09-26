@@ -3,55 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guía de Orientación Técnica - SAE</title>
-  <link rel="stylesheet" href="estilos.css">
+  <title>Guía en el Proceso de Orientación</title>
+  <link rel="stylesheet" href="estilos-bloques.css">
 </head>
 <body>
   <header>
-    <div class="logo">
-      <img src="logo-sae.png" alt="Logo SAE">
-      <h1>Guía de Apoyo en el Proceso Orientación</h1>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#proceso">Proceso PEER</a></li>
-        <li><a href="#recursos">Recursos</a></li>
-        <li><a href="#casos">Casos prácticos</a></li>
-      </ul>
-    </nav>
+    <h1>Guía en el Proceso de Orientación</h1>
+    <p>Modelo para personal técnico del SAE</p>
   </header>
 
-  <section class="hero" id="inicio">
-    <h2>Apoyo a la orientación laboral en oficinas SAE</h2>
-    <p>Explora el proceso PEER y accede a herramientas prácticas para técnicos de orientación.</p>
-    <a href="#proceso" class="boton">Empezar</a>
-  </section>
+  <main>
+    <section class="bloque capa" id="contexto">
+      <h2>🧭 Proceso & Contexto (PEER)</h2>
+      <p>Marco general que estructura la orientación laboral en función de demanda, estrategia y entorno.</p>
+      <button onclick="mostrarCapa('eci')">Ver siguiente capa</button>
+    </section>
 
-  <section class="proceso" id="proceso">
-    <h2>Proceso PEER Interactivo</h2>
-    <div class="diagrama">
-      <!-- Aquí se integrará el diagrama interactivo -->
-      <p>[Diagrama PEER con nodos desplegables]</p>
-    </div>
-  </section>
+    <section class="bloque capa oculto" id="eci">
+      <h2>🔍 ECI - Evaluación del Contexto de Intervención</h2>
+      <p>Identifica el tipo de demanda y el entorno estratégico.</p>
+      <ul>
+        <li>EPD - Evaluación de la Demanda</li>
+        <li>Estrategia Política</li>
+        <li>Estrategia Económica</li>
+        <li>Estrategia Militar</li>
+      </ul>
+      <button onclick="mostrarCapa('epd')">Ver siguiente capa</button>
+    </section>
 
-  <section class="recursos" id="recursos">
-    <h2>Recursos para técnicos</h2>
-    <ul>
-      <li><a href="#">Plantillas de entrevista</a></li>
-      <li><a href="#">Guías de estrategia</a></li>
-      <li><a href="#">Materiales de formación</a></li>
-    </ul>
-  </section>
+    <section class="bloque capa oculto" id="epd">
+      <h2>📊 EPD - Evaluación de la Demanda</h2>
+      <p>Clasifica la demanda según su naturaleza:</p>
+      <ul>
+        <li>Demanda Política → Suministro Político</li>
+        <li>Demanda Económica → Suministro Económico</li>
+        <li>Demanda Militar → Suministro Militar</li>
+      </ul>
+      <button onclick="mostrarCapa('estrategia')">Ver siguiente capa</button>
+    </section>
 
-  <section class="casos" id="casos">
-    <h2>Casos prácticos</h2>
-    <p>Simulaciones interactivas para mejorar la toma de decisiones en orientación.</p>
-  </section>
+    <section class="bloque capa oculto" id="estrategia">
+      <h2>🧠 Estrategias y Configuraciones</h2>
+      <p>Aplicación de soluciones según el tipo de demanda y contexto.</p>
+      <ul>
+        <li>Empires</li>
+        <li>Geopolítica</li>
+        <li>Mercados</li>
+        <li>Globalización</li>
+      </ul>
+    </section>
+  </main>
 
   <footer>
     <p>&copy; 2025 Servicio Andaluz de Empleo · Junta de Andalucía</p>
   </footer>
+
+  <script>
+    function mostrarCapa(id) {
+      document.getElementById(id).classList.remove('oculto');
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
