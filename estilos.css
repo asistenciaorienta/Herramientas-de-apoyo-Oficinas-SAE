@@ -73,7 +73,7 @@ header {
   background-color: transparent;
 }
 
-/* Flechas horizontales */
+/* Flecha horizontal (Itinerario → Desarrollo) */
 .flecha-horizontal::before {
   content: "";
   position: absolute;
@@ -94,25 +94,48 @@ header {
   border-right: 6px solid transparent;
 }
 
-/* Flechas verticales */
-.flecha-vertical::before {
+/* Flechas oblicuas hacia abajo */
+.flecha-oblicua-abajo::before {
   content: "";
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) rotate(45deg);
   width: 2px;
   height: 100%;
   background-color: var(--azul);
 }
 
-.flecha-vertical::after {
+.flecha-oblicua-abajo::after {
   content: "";
   position: absolute;
-  bottom: -10px;
+  bottom: 10px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) rotate(45deg);
   border-top: 10px solid var(--azul);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+}
+
+/* Flechas oblicuas hacia arriba */
+.flecha-oblicua-arriba::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) rotate(-45deg);
+  width: 2px;
+  height: 100%;
+  background-color: var(--azul);
+}
+
+.flecha-oblicua-arriba::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-45deg);
+  border-bottom: 10px solid var(--azul);
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
 }
