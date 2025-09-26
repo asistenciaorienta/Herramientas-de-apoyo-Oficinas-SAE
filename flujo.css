@@ -20,12 +20,13 @@ header {
   padding: 2rem;
 }
 
-.cuadricula {
+.grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 150px);
+  grid-template-rows: repeat(3, 150px);
   gap: 1rem;
   padding: 2rem;
+  position: relative;
 }
 
 .bloque {
@@ -41,34 +42,29 @@ header {
   justify-content: center;
 }
 
-.vacio {
+.empty {
   background-color: transparent;
 }
 
-.flecha {
-  position: relative;
-}
-
+/* Flecha desde EOI a Diseño de Itinerario */
 .flecha-eoi-itinerario::before {
   content: "";
   position: absolute;
-  top: -150px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 2px;
-  height: 300px;
+  top: calc(150px + 75px); /* mitad de fila 2 */
+  left: calc(25% + 75px);  /* centro de columna 1 */
+  width: calc(25% + 75px); /* hasta columna 3 */
+  height: 2px;
   background-color: var(--azul);
 }
 
 .flecha-eoi-itinerario::after {
   content: "";
   position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 12px solid var(--azul);
+  top: calc(150px + 75px - 6px);
+  left: calc(50% + 75px - 6px);
+  border-top: 10px solid var(--azul);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
 }
 
 footer {
