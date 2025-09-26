@@ -94,48 +94,52 @@ header {
   border-right: 6px solid transparent;
 }
 
-/* Flechas oblicuas hacia abajo */
-.flecha-oblicua-abajo::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%) rotate(45deg);
-  width: 2px;
-  height: 100%;
-  background-color: var(--azul);
-}
-
-.flecha-oblicua-abajo::after {
-  content: "";
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%) rotate(45deg);
-  border-top: 10px solid var(--azul);
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-}
-
-/* Flechas oblicuas hacia arriba */
+/* Flecha oblicua hacia arriba (↖) */
 .flecha-oblicua-arriba::before {
   content: "";
   position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%) rotate(-45deg);
   width: 2px;
   height: 100%;
   background-color: var(--azul);
+  top: 0;
+  left: 0;
+  transform: rotate(-45deg);
+  transform-origin: bottom left;
 }
 
 .flecha-oblicua-arriba::after {
   content: "";
   position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%) rotate(-45deg);
+  top: 0;
+  left: 0;
+  transform: rotate(-45deg) translate(10px, -10px);
+  transform-origin: bottom left;
   border-bottom: 10px solid var(--azul);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+}
+
+/* Flecha oblicua hacia abajo (↘) */
+.flecha-oblicua-abajo::before {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background-color: var(--azul);
+  top: 0;
+  right: 0;
+  transform: rotate(45deg);
+  transform-origin: top right;
+}
+
+.flecha-oblicua-abajo::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: rotate(45deg) translate(-10px, 10px);
+  transform-origin: top right;
+  border-top: 10px solid var(--azul);
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
 }
