@@ -31,6 +31,7 @@ table.flujo td {
   position: relative;
   text-align: center;
   vertical-align: middle;
+  border: 1px solid #ccc; /* Color gris claro para no saturar */
 }
 
 .bloque {
