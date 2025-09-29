@@ -6,14 +6,14 @@
   <style>
     body {
       font-family: 'Open Sans', sans-serif;
-      background: #f4f9f4;
+      background: #ffffff;
       margin: 0;
       padding: 2rem;
     }
 
     h1 {
       text-align: center;
-      color: #006633;
+      color: #087021;
     }
 
     .diagram {
@@ -31,7 +31,7 @@
     .box {
       padding: 1rem 1.5rem;
       border-radius: 10px;
-      color: #fff;
+      color: #ffffff;
       font-weight: bold;
       text-align: center;
       box-shadow: 0 4px 6px rgba(0,0,0,0.2);
@@ -40,32 +40,33 @@
     }
 
     .inicio {
-      background: #4CAF50;
+      background: #087021;
       grid-column: 1;
       grid-row: 2;
     }
 
     .puntuales {
-      background: #FFA726;
+      background: #e3cd66;
+      color: #333;
       grid-column: 2;
       grid-row: 1;
     }
 
     .profundidad {
-      background: #FFEB3B;
+      background: #a5cca0;
       color: #333;
       grid-column: 2;
       grid-row: 3;
     }
 
     .itinerario {
-      background: #42A5F5;
+      background: #77b5c3;
       grid-column: 2;
       grid-row: 2;
     }
 
     .servicios {
-      background: #AB47BC;
+      background: #087021;
       grid-column: 3;
       grid-row: 2;
     }
@@ -81,7 +82,7 @@
     }
 
     path {
-      stroke: #444;
+      stroke: #333;
       stroke-width: 2;
       fill: none;
       marker-end: url(#arrowhead);
@@ -91,28 +92,27 @@
 <body>
   <h1>Proceso de Orientación</h1>
   <div class="diagram">
-    <div class="box inicio">Entrevista Inicial de Orientación</div>
-    <div class="box puntuales">Servicios puntuales</div>
-    <div class="box profundidad">Entrevista en Profundidad</div>
+    <div class="box inicio">Entrevista Inicial</div>
+    <div class="box puntuales">Servicios Puntuales</div>
+    <div class="box profundidad">Entrevista Profundidad</div>
     <div class="box itinerario">Diseño de Itinerario</div>
     <div class="box servicios">Desarrollo de Servicios</div>
 
     <svg class="arrows" viewBox="0 0 1000 600" preserveAspectRatio="none">
       <defs>
         <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
-          <polygon points="0 0, 12 4, 0 8" fill="#444" />
+          <polygon points="0 0, 12 4, 0 8" fill="#333" />
         </marker>
       </defs>
 
-      <!-- Flechas curvas ajustadas para que las puntas queden en el borde de los bloques -->
-      <path d="M 200 300 C 330 150, 470 120, 500 110" /> <!-- inicial → puntuales -->
-      <path d="M 200 300 C 330 300, 470 300, 495 300" /> <!-- inicial → itinerario -->
-      <path d="M 200 300 C 330 450, 470 480, 500 490" /> <!-- inicial → profundidad -->
-      <path d="M 500 110 C 520 180, 520 230, 500 300" /> <!-- puntuales → itinerario -->
-      <path d="M 500 490 C 520 420, 520 370, 500 300" /> <!-- profundidad → itinerario -->
+      <!-- Flechas ajustadas desde los bordes de los bloques -->
+      <path d="M 200 300 C 300 180, 470 130, 500 120" /> <!-- inicio → puntuales -->
+      <path d="M 200 300 C 300 300, 470 300, 495 300" /> <!-- inicio → itinerario -->
+      <path d="M 200 300 C 300 420, 470 470, 500 480" /> <!-- inicio → profundidad -->
+      <path d="M 500 120 C 520 170, 520 230, 500 300" /> <!-- puntuales → itinerario -->
+      <path d="M 500 480 C 520 430, 520 370, 500 300" /> <!-- profundidad → itinerario -->
       <path d="M 500 300 C 600 300, 700 300, 800 300" /> <!-- itinerario → servicios -->
     </svg>
   </div>
 </body>
 </html>
-
