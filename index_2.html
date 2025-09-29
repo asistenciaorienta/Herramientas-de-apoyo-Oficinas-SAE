@@ -74,7 +74,7 @@
 
     <svg class="arrows">
       <defs>
-        <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="6" refY="4" orient="auto" markerUnits="strokeWidth">
+        <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto" markerUnits="strokeWidth">
           <polygon points="0 0, 12 4, 0 8" fill="#333" />
         </marker>
       </defs>
@@ -108,10 +108,17 @@
       const y2 = to.top + to.height/2;
 
       // Control points para curva suave
-      const cx1 = x1 + (x2 - x1)/2;
-      const cy1 = y1;
-      const cx2 = x1 + (x2 - x1)/2;
-      const cy2 = y2;
+     //  const cx1 = x1 + (x2 - x1)/2;
+     //  const cy1 = y1;
+     //  const cx2 = x1 + (x2 - x1)/2;
+     //  const cy2 = y2;
+
+const cx1 = x1;
+const cy1 = y1 + (y2-y1)/2;
+const cx2 = x2;
+const cy2 = y1 + (y2-y1)/2;
+
+      
 
       const path = document.createElementNS("http://www.w3.org/2000/svg","path");
       path.setAttribute("d", `M ${x1} ${y1} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${x2} ${y2}`);
@@ -135,6 +142,7 @@
 
       svg.setAttribute("width", container.offsetWidth);
       svg.setAttribute("height", container.offsetHeight);
+      svg.setAttribute("viewBox", `0 0 ${container.offsetWidth} ${container.offsetHeight}`);
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("puntuales"));
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("itinerario"));
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("profundidad"));
