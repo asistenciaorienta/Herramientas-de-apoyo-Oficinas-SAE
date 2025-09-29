@@ -18,7 +18,7 @@
 
     .diagram {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: repeat(7, 1fr); /* más columnas = más espacio horizontal */
       grid-template-rows: auto auto auto;
       gap: 2rem;
       justify-items: center;
@@ -41,10 +41,10 @@
     }
 
     #inicio { background: #087021; grid-column: 1; grid-row: 2; }
-    #puntuales { background: #e3cd66; color:#333; grid-column: 2; grid-row: 1; }
-    #profundidad { background: #a5cca0; color:#333; grid-column: 2; grid-row: 3; }
-    #itinerario { background: #77b5c3; grid-column: 3; grid-row: 2; }
-    #servicios { background: #087021; grid-column: 4; grid-row: 2; }
+    #puntuales { background: #e3cd66; color:#333; grid-column: 3; grid-row: 1; }
+    #profundidad { background: #a5cca0; color:#333; grid-column: 3; grid-row: 3; }
+    #itinerario { background: #77b5c3; grid-column: 5; grid-row: 2; }
+    #servicios { background: #087021; grid-column: 7; grid-row: 2; }
 
     svg.arrows {
       position: absolute;
