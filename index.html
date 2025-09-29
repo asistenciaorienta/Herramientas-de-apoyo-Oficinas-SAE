@@ -1,92 +1,192 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Flujo de Orientación SAE</title>
-  <link rel="stylesheet" href="estilos.css" />
+  <meta charset="UTF-8">
+  <title>Proceso de Orientación - Flechas Dinámicas Corregidas</title>
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #087021;
+      color: #ffffff;
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    footer {
+      background-color: #555555;
+      color: #ffffff;
+      text-align: center;
+      padding: 0.8rem 0;
+      margin-top: auto;
+      font-size: 1rem;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem;
+    }
+
+    .diagram {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: auto auto auto;
+      gap: 2rem;
+      justify-items: center;
+      align-items: center;
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .box {
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      color: #ffffff;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      width: 200px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #inicio { background: #087021; grid-column: 1; grid-row: 2; }
+    #puntuales { background: #e3cd66; color:#333; grid-column: 3; grid-row: 1; }
+    #profundidad { background: #a5cca0; color:#333; grid-column: 3; grid-row: 3; }
+    #itinerario { background: #77b5c3; grid-column: 5; grid-row: 2; }
+    #servicios { background: #087021; grid-column: 7; grid-row: 2; }
+
+    svg.arrows {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    path {
+      stroke: #333;
+      stroke-width: 2;
+      fill: none;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Flujo de Orientación Técnica</h1>
-    <p>Modelo PEER en cuadrícula 7×5 con tabla y flechas animadas</p>
-  </header>
+  <header>Proceso de orientación</header>
 
-  <table class="flujo">
-    <tr> <!--fila 1-->
-      <td></td>
-      <td></td>
-      <td>
-        <div class="bloque" data-info="Acciones rápidas como inscripción, renovación o duplicado.">🔹<br><strong>Servicios Puntuales</strong></div>
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr> <!--fila 2-->
-      <td></td>
-      <td>
-        <div class="flecha flecha-oblicua-arriba"></div>
-      </td>
-      <td></td>
-      <td>
-        <div class="flecha flecha-oblicua-abajo"></div>
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr> <!--fila 3-->
-      <td>
-        <div class="bloque" data-info="Primera toma de contacto con la persona usuaria.">🟡<br><strong>EOI</strong></div>
-      </td>
-      <td>
-        <div class="flecha flecha-horizontal"></div>
-      </td>
-      <td>
-        <div class="flecha flecha-horizontal"></div>
-      </td>
-      <td>
-        <div class="flecha flecha-horizontal"></div>
-      </td>
-      <td>
-        <div class="bloque" data-info="Diseño de un plan personalizado de inserción laboral.">🟢<br><strong>Diseño de Itinerario</strong></div>
-      </td>
-      <td>
-        <div class="flecha flecha-horizontal"></div></td>
-      <td>
-        <div class="bloque" data-info="Acceso a servicios como formación, intermediación y orientación continua.">🔘<br><strong>Desarrollo de Servicios</strong></div>
-      </td>
-    </tr>
-    <tr> <!--fila 4-->
-      <td></td>
-      <td>
-        <div class="flecha flecha-oblicua-abajo"></div>
-      </td>
-      <td></td>
-      <td>
-        <div class="flecha flecha-oblicua-arriba"></div>
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr> <!--fila 5-->
-      <td></td>
-      <td></td>
-      <td>
-        <div class="bloque" data-info="Análisis detallado del perfil, competencias y objetivos.">🔸<br><strong>Entrevista en Profundidad</strong></div>
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </table>
+  <main>
+    <div class="diagram" id="diagram">
+      <div class="box" id="inicio">Entrevista Inicial <br> de Orientación</div>
+      <div class="box" id="puntuales">Servicios <br> Puntuales</div>
+      <div class="box" id="profundidad">Entrevista <br>en Profundidad</div>
+      <div class="box" id="itinerario">Diseño de <br> Itinerario</div>
+      <div class="box" id="servicios">Desarrollo <br>de Servicios</div>
 
-  <footer>
-    <p>&copy; 2025 Servicio Andaluz de Empleo · Junta de Andalucía</p>
-  </footer>
+      <svg class="arrows">
+        <defs>
+          <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto" markerUnits="strokeWidth">
+            <polygon points="0 0, 12 4, 0 8" fill="#333" />
+          </marker>
+        </defs>
+      </svg>
+    </div>
+  </main>
+
+  <footer>© 2025 Servicio Andaluz de Empleo · Junta de Andalucía</footer>
+
+  <script>
+    function getBlockPosition(block) {
+      return {
+        left: block.offsetLeft,
+        top: block.offsetTop,
+        width: block.offsetWidth,
+        height: block.offsetHeight,
+        right: block.offsetLeft + block.offsetWidth,
+        bottom: block.offsetTop + block.offsetHeight
+      };
+    }
+
+    function drawArrow(svg, fromBlock, toBlock, fromCorner='center', toCorner='center', arrowHead=false) {
+      const from = getBlockPosition(fromBlock);
+      const to = getBlockPosition(toBlock);
+
+      let x1, y1, x2, y2;
+
+      // Coordenadas de inicio según esquina
+      switch(fromCorner) {
+        case 'top-right': x1 = from.right; y1 = from.top; break;
+        case 'bottom-right': x1 = from.right; y1 = from.bottom; break;
+        case 'top-left': x1 = from.left; y1 = from.top; break;
+        case 'bottom-left': x1 = from.left; y1 = from.bottom; break;
+        default: x1 = from.right; y1 = from.top + from.height/2;
+      }
+
+      // Coordenadas de fin según esquina
+      switch(toCorner) {
+        case 'top-left': x2 = to.left; y2 = to.top; break;
+        case 'bottom-left': x2 = to.left; y2 = to.bottom; break;
+        case 'top-right': x2 = to.right; y2 = to.top; break;
+        case 'bottom-right': x2 = to.right; y2 = to.bottom; break;
+        default: x2 = to.left; y2 = to.top + to.height/2;
+      }
+
+      // Control points para curva suave
+      const cx1 = x1 + (x2-x1)/2;
+      const cy1 = y1;
+      const cx2 = x1 + (x2-x1)/2;
+      const cy2 = y2;
+
+      const path = document.createElementNS("http://www.w3.org/2000/svg","path");
+      path.setAttribute("d", `M ${x1} ${y1} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${x2} ${y2}`);
+      path.setAttribute("stroke", "#333");
+      path.setAttribute("stroke-width", "2");
+      path.setAttribute("fill", "none");
+      
+      if (arrowHead) {
+        path.setAttribute("marker-end", "url(#arrowhead)");
+      }
+
+      svg.appendChild(path);
+    }
+
+    function drawAllArrows() {
+      const svg = document.querySelector("svg.arrows");
+      const container = document.getElementById("diagram");
+
+      // Limpiar flechas existentes
+      svg.innerHTML = `<defs>
+        <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto" markerUnits="strokeWidth">
+          <polygon points="0 0, 12 4, 0 8" fill="#333" />
+        </marker>
+      </defs>`;
+
+      svg.setAttribute("width", container.offsetWidth);
+      svg.setAttribute("height", container.offsetHeight);
+      svg.setAttribute("viewBox", `0 0 ${container.offsetWidth} ${container.offsetHeight}`);
+
+      // Flechas verticales → sin punta, horizontales → con punta
+      drawArrow(svg, document.getElementById("inicio"), document.getElementById("puntuales"), 'top-right', 'left', false);
+      drawArrow(svg, document.getElementById("inicio"), document.getElementById("itinerario"), 'right', 'left', true);
+      drawArrow(svg, document.getElementById("inicio"), document.getElementById("profundidad"), 'bottom-right', 'left', false);
+      drawArrow(svg, document.getElementById("puntuales"), document.getElementById("itinerario"), 'right', 'top-left', false);
+      drawArrow(svg, document.getElementById("profundidad"), document.getElementById("itinerario"), 'right', 'bottom-left', false);
+      drawArrow(svg, document.getElementById("itinerario"), document.getElementById("servicios"), 'right', 'left', true);
+    }
+
+    window.addEventListener("load", drawAllArrows);
+    window.addEventListener("resize", drawAllArrows);
+  </script>
 </body>
 </html>
+
