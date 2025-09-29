@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Prototipos - Herramienta de Orientación SAE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root{ --radius:12px; --transition:200ms ease; }
+
+    body{ font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Arial; margin:0; background:#f6f7f9; color:#1b1b1b; }
+    header{ display:flex; gap:12px; align-items:center; justify-content:space-between; padding:18px 28px; background:linear-gradient(90deg,#0f7a4a,#2aa06f); color:white;}
+    header .title{display:flex; gap:12px; align-items:center}
+    header h1{font-size:18px;margin:0;font-weight:600}
+    header p{margin:0; opacity:.9; font-size:13px}
+
+    .container{max-width:1200px;margin:28px auto;padding:18px}
+    .tabs{display:flex; gap:8px; margin-bottom:18px}
+    .tab{padding:10px 14px;border-radius:8px;background:white;border:1px solid #e6e6e6;cursor:pointer}
+    .tab.active{box-shadow:0 6px 18px rgba(35,47,53,.06); transform:translateY(-2px)}
+
+    /* Layout for prototypes */
+    .prototype{display:none;background:white;border-radius:14px;padding:18px;border:1px solid #e8e8e8}
+    .prototype.active{display:block}
+
+    /* --- SAEMPLEO STYLE (colorful + cards) --- */
+    .sae-root{ --green:#0f7a4a; --accent1:#4fb0ff; --accent2:#ffb74d; --accent3:#b388ff }
+    .sae-canvas{ display:flex; gap:20px; align-items:center; justify-content:center; padding:28px; }
+    .flow{display:grid; grid-template-columns: 220px 220px 220px; grid-template-rows: auto auto; align-items:center; gap:30px; position:relative}
+    .node{background:white;border-radius:10px;padding:18px; min-height:80px; display:flex; align-items:center; justify-content:center; text-align:center; box-shadow:0 6px 18px rgba(11,23,35,.06); cursor:pointer; transition:var(--transition); z-index:2}
+    .node:hover{transform:translateY(-6px)}
+    .node .title{font-weight:700}
+    .node.initial{background:linear-gradient(180deg,#cfeeda,#f0fbf5); border:2px solid rgba(15,122,74,.08)}
+    .node.services{background:linear-gradient(180deg,#fff2d9,#fff9f0); border:2px solid rgba(255,183,77,.08)}
+    .node.depth{background:linear-gradient(180deg,#fff8d6,#fffdf5); border:2px solid rgba(255,200,70,.08)}
+    .node.design{background:linear-gradient(180deg,#dfeaff,#f7fbff); border:2px solid rgba(79,176,255,.08)}
+    .node.develop{background:linear-gradient(180deg,#f4e6ff,#fcf8ff); border:2px solid rgba(179,136,255,.08)}
+
+    /* arrows using SVG lines */
+    svg.arrows{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none}
+    .arrow-line{stroke:#9da9b5;stroke-width:2;marker-end:url(#arrowhead)}
+
+    .sae-side{width:360px;padding:14px;border-left:1px dashed #e9eef3}
+    .card{background:linear-gradient(180deg,white,#fbfdff);padding:12px;border-radius:10px;margin-bottom:12px;}
+    .chip{display:inline-block;padding:6px 10px;border-radius:20px;font-weight:600;font-size:12px;background:linear-gradient(90deg,var(--accent1),#86cbff);color:white}
+
+    /* --- JUNTA STYLE (institutional) --- */
+    .junta-root{ --green:#0b6b3a; --muted:#4b5953 }
+    .junta-canvas{display:flex; gap:20px; align-items:flex-start}
+    .timeline{width:100%;padding:18px}
+    .step{display:flex; gap:18px; align-items:flex-start;padding:14px;border-radius:8px;border-left:6px solid rgba(11,107,58,.1); margin-bottom:14px;background:#fff}
+    .step .num{width:36px;height:36px;border-radius:6px;background:var(--green);color:white;display:flex;align-items:center;justify-content:center;font-weight:700}
+    .step h3{margin:0;font-size:15px}
+    .step p{margin:6px 0 0 0; color:#545b57}
+    .junta-info{width:320px;padding:14px}
+
+    /* Responsive */
+    @media (max-width:1000px){ .flow{grid-template-columns: 1fr; grid-auto-rows: auto} .sae-side{display:none} .junta-canvas{flex-direction:column} svg.arrows{display:none} }
+
+    /* Modal / panel */
+    .panel{position:fixed;right:20px;top:80px;width:380px;background:white;border-radius:10px;padding:16px;box-shadow:0 20px 50px rgba(20,30,40,.12);display:none;z-index:40}
+    .panel.open{display:block}
+    .panel h4{margin:0 0 8px 0}
+    .closebtn{position:absolute;right:10px;top:8px;border:none;background:transparent;font-size:18px;cursor:pointer}
+
+    /* small helpers */
+    .muted{color:#6b7170;font-size:13px}
+    footer{padding:18px 28px;font-size:13px;color:#566;}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title">
+      <svg width="48" height="36" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="36" rx="6" fill="white"/><text x="9" y="23" font-family="Montserrat" font-weight="600" font-size="12" fill="#0f7a4a">SAE</text></svg>
+      <div>
+        <h1>Herramienta de orientación - prototipos</h1>
+        <p>Dos propuestas: estilo <strong>saempleo</strong> (colorido) y estilo <strong>Junta</strong> (institucional)</p>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="tabs">
+        <div class="tab active" data-target="sae">Propuesta: saempleo.es</div>
+        <div class="tab" data-target="junta">Propuesta: juntadeandalucia.es</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="prototype sae-root active" id="sae">
+      <div style="display:flex;gap:18px;align-items:flex-start">
+        <div class="sae-canvas">
+          <div class="flow">
+            <!-- Nodes -->
+            <div class="node initial" style="grid-column:1;grid-row:1" data-node="Entrevista Inicial de Orientación"><div class="title">Entrevista Inicial<br><span class="muted">de Orientación</span></div></div>
+
+            <div class="node services" style="grid-column:2;grid-row:1" data-node="Servicios puntuales"><div class="title">Servicios<br><span class="muted">puntuales</span></div></div>
+
+            <div class="node depth" style="grid-column:2;grid-row:2" data-node="Entrevista en Profundidad"><div class="title">Entrevista en<br><span class="muted">Profundidad</span></div></div>
+
+            <div class="node design" style="grid-column:3;grid-row:1 / span 2" data-node="Diseño de Itinerario"><div class="title">Diseño de<br><span class="muted">Itinerario</span></div></div>
+
+            <div class="node develop" style="grid-column:3;grid-row:2" data-node="Desarrollo de Servicios"><div class="title">Desarrollo de<br><span class="muted">Servicios</span></div></div>
+
+            <!-- SVG arrows -->
+            <svg class="arrows">
+              <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                  <polygon points="0 0, 10 3.5, 0 7" fill="#9da9b5" />
+                </marker>
+              </defs>
+              <!-- Lines connecting -->
+              <line class="arrow-line" x1="180" y1="60" x2="420" y2="60" /> <!-- inicial -> servicios -->
+              <line class="arrow-line" x1="180" y1="60" x2="420" y2="150" /> <!-- inicial -> profundidad -->
+              <line class="arrow-line" x1="420" y1="60" x2="660" y2="100" /> <!-- servicios -> diseño -->
+              <line class="arrow-line" x1="420" y1="150" x2="660" y2="100" /> <!-- profundidad -> diseño -->
+              <line class="arrow-line" x1="660" y1="100" x2="660" y2="180" /> <!-- diseño -> desarrollo -->
+            </svg>
+          </div>
+        </div>
+
+        <aside class="sae-side">
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div class="chip">Herramientas SAE</div>
+                <div class="muted" style="margin-top:8px">Recursos rápidos y checklists</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4 style="margin:0 0 8px 0">Acciones rápidas</h4>
+            <button onclick="alert('Generar informe demo')" style="padding:8px 12px;border-radius:8px;border:none;background:linear-gradient(90deg,var(--accent1),#86cbff);color:white;cursor:pointer">Generar informe</button>
+          </div>
+
+          <div class="card">
+            <h4 style="margin:0 0 8px 0">Ayuda</h4>
+            <p class="muted">Accede a guías, formularios y normativa desde esta zona.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="prototype junta-root" id="junta">
+      <!-- contenido igual que antes -->
+    </section>
+  </main>
+
+  <div class="panel" id="panel">
+    <button class="closebtn" onclick="closePanel()">✕</button>
+    <h4 id="panelTitle">Título</h4>
+    <p id="panelDesc" class="muted">Contenido de ejemplo. Aquí podríamos insertar checklists, campos editables, ejemplos de itinerarios y enlaces a PDFs.</p>
+    <div style="margin-top:12px">
+      <strong>Recursos:</strong>
+      <ul id="panelList"></ul>
+    </div>
+  </div>
+
+  <footer>
+    Prototipo (demo) — diseñado para uso interno de servicios de orientación. Ajustes y export a HTML/CSS/JS reales disponibles.
+  </footer>
+
+  <script>
+    // Tabs
+    document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',function(){
+      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+      this.classList.add('active');
+      const target=this.dataset.target;
+      document.querySelectorAll('.prototype').forEach(p=>p.classList.remove('active'));
+      document.getElementById(target).classList.add('active');
+    }))
+
+    // Node click -> panel
+    function openPanelFor(nodeName){
+      const panel=document.getElementById('panel');
+      const title=document.getElementById('panelTitle');
+      const desc=document.getElementById('panelDesc');
+      const list=document.getElementById('panelList');
+      title.textContent=nodeName;
+      list.innerHTML='';
+      const registry={
+        'Entrevista Inicial de Orientación':['Ficha inicial (PDF)','Checklist de recepción','Guía rápida (1 p.)'],
+        'Servicios puntuales':['Ofertas actuales','Formulario de derivación','Listado de cursos breves'],
+        'Entrevista en Profundidad':['Plantilla entrevista profunda','Test competencias','Mapa de recursos locales'],
+        'Diseño de Itinerario':['Plantilla IPI','Calendario de acciones','Matrices de seguimiento'],
+        'Desarrollo de Servicios':['Registro de actividad','Evaluación intermedia','Informe final']
+      };
+      desc.textContent = 'Recursos y acciones recomendadas para: ' + nodeName;
+      const items = registry[nodeName] || ['Recurso 1','Recurso 2'];
+      items.forEach(i=>{ const li=document.createElement('li'); li.textContent=i; list.appendChild(li); });
+      panel.classList.add('open');
+    }
+
+    function closePanel(){ document.getElementById('panel').classList.remove('open'); }
+    document.querySelectorAll('[data-node]').forEach(n=>{ n.addEventListener('click',()=>openPanelFor(n.dataset.node)); });
+
+    function openPanel(key){ openPanelFor(key); }
+
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape') closePanel(); });
+  </script>
+</body>
+</html>
