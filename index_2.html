@@ -151,11 +151,11 @@
 
       // Flechas verticales → sin punta, horizontales → con punta
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("puntuales"), 'top-right', 'bottom-left', false);
-      drawArrow(svg, document.getElementById("inicio"), document.getElementById("itinerario"), 'top-right', 'top-left', true);
+      drawArrow(svg, document.getElementById("inicio"), document.getElementById("itinerario"), 'right', 'left', true);
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("profundidad"), 'bottom-right', 'top-left', false);
-      drawArrow(svg, document.getElementById("puntuales"), document.getElementById("itinerario"), 'bottom-right', 'top-left', true);
-      drawArrow(svg, document.getElementById("profundidad"), document.getElementById("itinerario"), 'top-right', 'bottom-left', true);
-      drawArrow(svg, document.getElementById("itinerario"), document.getElementById("servicios"), 'top-right', 'top-left', true);
+      drawArrow(svg, document.getElementById("puntuales"), document.getElementById("itinerario"), 'bottom-right', 'top-left', false);
+      drawArrow(svg, document.getElementById("profundidad"), document.getElementById("itinerario"), 'top-right', 'bottom-left', false);
+      drawArrow(svg, document.getElementById("itinerario"), document.getElementById("servicios"), 'right', 'left', true);
     }
 
     window.addEventListener("load", drawAllArrows);
