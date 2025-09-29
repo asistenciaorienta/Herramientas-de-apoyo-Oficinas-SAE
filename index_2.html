@@ -36,6 +36,7 @@
       text-align: center;
       box-shadow: 0 4px 6px rgba(0,0,0,0.2);
       z-index: 1;
+      width: 200px;
     }
 
     .inicio {
@@ -75,13 +76,14 @@
       left: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none;
-      z-index: 0;
+      pointer-events: none; /* para que no bloqueen clics */
+      z-index: 2; /* por encima de los bloques */
     }
 
-    line, path {
+    path {
       stroke: #444;
       stroke-width: 2;
+      fill: none;
       marker-end: url(#arrowhead);
     }
   </style>
@@ -95,21 +97,22 @@
     <div class="box itinerario">Diseño de Itinerario</div>
     <div class="box servicios">Desarrollo de Servicios</div>
 
-    <svg class="arrows">
+    <svg class="arrows" viewBox="0 0 1000 600" preserveAspectRatio="none">
       <defs>
-        <marker id="arrowhead" markerWidth="10" markerHeight="7" 
-          refX="10" refY="3.5" orient="auto">
-          <polygon points="0 0, 10 3.5, 0 7" fill="#444" />
+        <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
+          <polygon points="0 0, 12 4, 0 8" fill="#444" />
         </marker>
       </defs>
-      <!-- Flechas -->
-      <line x1="20%" y1="50%" x2="47%" y2="20%" /> <!-- inicial → puntuales -->
-      <line x1="20%" y1="50%" x2="47%" y2="50%" /> <!-- inicial → itinerario -->
-      <line x1="20%" y1="50%" x2="47%" y2="80%" /> <!-- inicial → profundidad -->
-      <line x1="53%" y1="20%" x2="53%" y2="47%" /> <!-- puntuales → itinerario -->
-      <line x1="53%" y1="80%" x2="53%" y2="53%" /> <!-- profundidad → itinerario -->
-      <line x1="60%" y1="50%" x2="80%" y2="50%" /> <!-- itinerario → servicios -->
+
+      <!-- Flechas curvas ajustadas para que las puntas queden en el borde de los bloques -->
+      <path d="M 200 300 C 330 150, 470 120, 500 110" /> <!-- inicial → puntuales -->
+      <path d="M 200 300 C 330 300, 470 300, 495 300" /> <!-- inicial → itinerario -->
+      <path d="M 200 300 C 330 450, 470 480, 500 490" /> <!-- inicial → profundidad -->
+      <path d="M 500 110 C 520 180, 520 230, 500 300" /> <!-- puntuales → itinerario -->
+      <path d="M 500 490 C 520 420, 520 370, 500 300" /> <!-- profundidad → itinerario -->
+      <path d="M 500 300 C 600 300, 700 300, 800 300" /> <!-- itinerario → servicios -->
     </svg>
   </div>
 </body>
 </html>
+
