@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Proceso de Orientación - Flechas Dinámicas Corregidas</title>
+  <title>Proceso de Orientación - Flechas Dinámicas a Esquinas</title>
   <style>
     body {
       font-family: 'Open Sans', sans-serif;
@@ -19,7 +18,7 @@
 
     .diagram {
       display: grid;
-      grid-template-columns: repeat(7, 1fr); /* más columnas = más espacio horizontal */
+      grid-template-columns: repeat(7, 1fr);
       grid-template-rows: auto auto auto;
       gap: 2rem;
       justify-items: center;
@@ -27,7 +26,6 @@
       position: relative;
       max-width: 1000px;
       margin: 0 auto;
-     /*  min-height: 600px;*/
     }
 
     .box {
@@ -53,14 +51,14 @@
       top: 0;
       left: 0;
       pointer-events: none;
-      z-index: 0;
+      z-index: 2;
     }
 
     path {
       stroke: #333;
       stroke-width: 2;
       fill: none;
-     /*  marker-end: url(#arrowhead);*/
+      marker-end: url(#arrowhead);
     }
   </style>
 </head>
@@ -94,39 +92,42 @@
       };
     }
 
+    function drawArrow(svg, fromBlock, toBlock, fromCorner='center', toCorner='center') {
+      const from = getBlockPosition(fromBlock);
+      const to = getBlockPosition(toBlock);
 
-    function drawArrow(svg, fromBlock, toBlock) {
-      const container = svg.parentElement;
-      const from = getBlockPosition(fromBlock, container);
-      const to = getBlockPosition(toBlock, container);
+      let x1, y1, x2, y2;
 
-      // Salida desde el borde derecho del bloque de origen
-      const x1 = from.right;
-      const y1 = from.top + from.height/2;
+      // Coordenadas de inicio según esquina
+      switch(fromCorner) {
+        case 'top-right': x1 = from.right; y1 = from.top; break;
+        case 'bottom-right': x1 = from.right; y1 = from.bottom; break;
+        case 'top-left': x1 = from.left; y1 = from.top; break;
+        case 'bottom-left': x1 = from.left; y1 = from.bottom; break;
+        default: x1 = from.right; y1 = from.top + from.height/2;
+      }
 
-      // Entrada al borde izquierdo del bloque destino
-      const x2 = to.left;
-      const y2 = to.top + to.height/2;
+      // Coordenadas de fin según esquina
+      switch(toCorner) {
+        case 'top-left': x2 = to.left; y2 = to.top; break;
+        case 'bottom-left': x2 = to.left; y2 = to.bottom; break;
+        case 'top-right': x2 = to.right; y2 = to.top; break;
+        case 'bottom-right': x2 = to.right; y2 = to.bottom; break;
+        default: x2 = to.left; y2 = to.top + to.height/2;
+      }
 
       // Control points para curva suave
-//       const cx1 = x1 + (x2 - x1)/2;
-//       const cy1 = y1;
-//       const cx2 = x1 + (x2 - x1)/2;
-//      const cy2 = y2;
-
-const cx1 = x1;
-const cy1 = y1 + (y2-y1)/2;
-const cx2 = x2;
-const cy2 = y1 + (y2-y1)/2;
-
-      
+      const cx1 = x1 + (x2-x1)/2;
+      const cy1 = y1;
+      const cx2 = x1 + (x2-x1)/2;
+      const cy2 = y2;
 
       const path = document.createElementNS("http://www.w3.org/2000/svg","path");
       path.setAttribute("d", `M ${x1} ${y1} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${x2} ${y2}`);
       path.setAttribute("stroke", "#333");
       path.setAttribute("stroke-width", "2");
       path.setAttribute("fill", "none");
-      // path.setAttribute("marker-end", "url(#arrowhead)");
+      //path.setAttribute("marker-end", "url(#arrowhead)");
       svg.appendChild(path);
     }
 
@@ -134,9 +135,9 @@ const cy2 = y1 + (y2-y1)/2;
       const svg = document.querySelector("svg.arrows");
       const container = document.getElementById("diagram");
 
-      // Limpiar las flechas existentes
+      // Limpiar flechas existentes
       svg.innerHTML = `<defs>
-        <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
+        <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto" markerUnits="strokeWidth">
           <polygon points="0 0, 12 4, 0 8" fill="#333" />
         </marker>
       </defs>`;
@@ -144,12 +145,14 @@ const cy2 = y1 + (y2-y1)/2;
       svg.setAttribute("width", container.offsetWidth);
       svg.setAttribute("height", container.offsetHeight);
       svg.setAttribute("viewBox", `0 0 ${container.offsetWidth} ${container.offsetHeight}`);
-      drawArrow(svg, document.getElementById("inicio"), document.getElementById("puntuales"));
-      drawArrow(svg, document.getElementById("inicio"), document.getElementById("itinerario"));
-      drawArrow(svg, document.getElementById("inicio"), document.getElementById("profundidad"));
-      drawArrow(svg, document.getElementById("puntuales"), document.getElementById("itinerario"));
-      drawArrow(svg, document.getElementById("profundidad"), document.getElementById("itinerario"));
-      drawArrow(svg, document.getElementById("itinerario"), document.getElementById("servicios"));
+
+      // Dibujar flechas apuntando a esquinas
+      drawArrow(svg, document.getElementById("inicio"), document.getElementById("puntuales"), 'top-right', 'bottom-left');
+      drawArrow(svg, document.getElementById("inicio"), document.getElementById("itinerario"), 'top-right', 'top-left');
+      drawArrow(svg, document.getElementById("inicio"), document.getElementById("profundidad"), 'bottom-right', 'top-left');
+      drawArrow(svg, document.getElementById("puntuales"), document.getElementById("itinerario"), 'bottom-right', 'top-left');
+      drawArrow(svg, document.getElementById("profundidad"), document.getElementById("itinerario"), 'top-right', 'bottom-left');
+      drawArrow(svg, document.getElementById("itinerario"), document.getElementById("servicios"), 'top-right', 'top-left');
     }
 
     window.addEventListener("load", drawAllArrows);
