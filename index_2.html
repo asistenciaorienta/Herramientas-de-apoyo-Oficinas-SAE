@@ -156,8 +156,8 @@ function drawArrow(svg, fromBlock, toBlock, fromCorner='center', toCorner='cente
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("itinerario"), 'right', 'left', true); // horizontal → con punta
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("profundidad"), 'bottom-right', 'top-left', false); // vertical → sin punta
       drawArrow(svg, document.getElementById("puntuales"), document.getElementById("itinerario"), 'bottom-right', 'top-left', true); // horizontal → con punta
-      drawArrow(svg, document.getElementById("profundidad"), document.getElementById("itinerario"), 'right', 'left', false); // vertical → sin punta
-      drawArrow(svg, document.getElementById("itinerario"), document.getElementById("servicios"), 'top-right', 'top-left', true); // horizontal → con punta
+      drawArrow(svg, document.getElementById("profundidad"), document.getElementById("itinerario"), 'top-right', 'bottom-left', false); // vertical → sin punta
+      drawArrow(svg, document.getElementById("itinerario"), document.getElementById("servicios"), 'right', 'left', true); // horizontal → con punta
     }
 
     window.addEventListener("load", drawAllArrows);
