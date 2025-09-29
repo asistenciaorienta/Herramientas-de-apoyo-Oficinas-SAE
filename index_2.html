@@ -69,7 +69,7 @@
     <div class="box" id="puntuales">Servicios <br> Puntuales</div>
     <div class="box" id="profundidad">Entrevista <br>en Profundidad</div>
     <div class="box" id="itinerario">Diseño de <br> Itinerario</div>
-    <div class="box" id="servicios">Desarrollo de <br> Servicios</div>
+    <div class="box" id="servicios">Desarrollo <br>de Servicios</div>
 
     <svg class="arrows">
       <defs>
@@ -92,44 +92,49 @@
       };
     }
 
-    function drawArrow(svg, fromBlock, toBlock, fromCorner='center', toCorner='center') {
-      const from = getBlockPosition(fromBlock);
-      const to = getBlockPosition(toBlock);
+function drawArrow(svg, fromBlock, toBlock, fromCorner='center', toCorner='center', arrowHead=false) {
+  const from = getBlockPosition(fromBlock);
+  const to = getBlockPosition(toBlock);
 
-      let x1, y1, x2, y2;
+  let x1, y1, x2, y2;
 
-      // Coordenadas de inicio según esquina
-      switch(fromCorner) {
-        case 'top-right': x1 = from.right; y1 = from.top; break;
-        case 'bottom-right': x1 = from.right; y1 = from.bottom; break;
-        case 'top-left': x1 = from.left; y1 = from.top; break;
-        case 'bottom-left': x1 = from.left; y1 = from.bottom; break;
-        default: x1 = from.right; y1 = from.top + from.height/2;
-      }
+  // Coordenadas de inicio según esquina
+  switch(fromCorner) {
+    case 'top-right': x1 = from.right; y1 = from.top; break;
+    case 'bottom-right': x1 = from.right; y1 = from.bottom; break;
+    case 'top-left': x1 = from.left; y1 = from.top; break;
+    case 'bottom-left': x1 = from.left; y1 = from.bottom; break;
+    default: x1 = from.right; y1 = from.top + from.height/2;
+  }
 
-      // Coordenadas de fin según esquina
-      switch(toCorner) {
-        case 'top-left': x2 = to.left; y2 = to.top; break;
-        case 'bottom-left': x2 = to.left; y2 = to.bottom; break;
-        case 'top-right': x2 = to.right; y2 = to.top; break;
-        case 'bottom-right': x2 = to.right; y2 = to.bottom; break;
-        default: x2 = to.left; y2 = to.top + to.height/2;
-      }
+  // Coordenadas de fin según esquina
+  switch(toCorner) {
+    case 'top-left': x2 = to.left; y2 = to.top; break;
+    case 'bottom-left': x2 = to.left; y2 = to.bottom; break;
+    case 'top-right': x2 = to.right; y2 = to.top; break;
+    case 'bottom-right': x2 = to.right; y2 = to.bottom; break;
+    default: x2 = to.left; y2 = to.top + to.height/2;
+  }
 
-      // Control points para curva suave
-      const cx1 = x1 + (x2-x1)/2;
-      const cy1 = y1;
-      const cx2 = x1 + (x2-x1)/2;
-      const cy2 = y2;
+  // Control points para curva suave
+  const cx1 = x1 + (x2-x1)/2;
+  const cy1 = y1;
+  const cx2 = x1 + (x2-x1)/2;
+  const cy2 = y2;
 
-      const path = document.createElementNS("http://www.w3.org/2000/svg","path");
-      path.setAttribute("d", `M ${x1} ${y1} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${x2} ${y2}`);
-      path.setAttribute("stroke", "#333");
-      path.setAttribute("stroke-width", "2");
-      path.setAttribute("fill", "none");
-      //path.setAttribute("marker-end", "url(#arrowhead)");
-      svg.appendChild(path);
-    }
+  const path = document.createElementNS("http://www.w3.org/2000/svg","path");
+  path.setAttribute("d", `M ${x1} ${y1} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${x2} ${y2}`);
+  path.setAttribute("stroke", "#333");
+  path.setAttribute("stroke-width", "2");
+  path.setAttribute("fill", "none");
+  
+  if (arrowHead) {
+    path.setAttribute("marker-end", "url(#arrowhead)");
+  }
+
+  svg.appendChild(path);
+}
+
 
     function drawAllArrows() {
       const svg = document.querySelector("svg.arrows");
@@ -147,12 +152,12 @@
       svg.setAttribute("viewBox", `0 0 ${container.offsetWidth} ${container.offsetHeight}`);
 
       // Dibujar flechas apuntando a esquinas
-      drawArrow(svg, document.getElementById("inicio"), document.getElementById("puntuales"), 'top-right', 'bottom-left');
-      drawArrow(svg, document.getElementById("inicio"), document.getElementById("itinerario"), 'top-right', 'top-left');
-      drawArrow(svg, document.getElementById("inicio"), document.getElementById("profundidad"), 'bottom-right', 'top-left');
-      drawArrow(svg, document.getElementById("puntuales"), document.getElementById("itinerario"), 'bottom-right', 'top-left');
-      drawArrow(svg, document.getElementById("profundidad"), document.getElementById("itinerario"), 'top-right', 'bottom-left');
-      drawArrow(svg, document.getElementById("itinerario"), document.getElementById("servicios"), 'top-right', 'top-left');
+      drawArrow(svg, document.getElementById("inicio"), document.getElementById("puntuales"), 'top-right', 'bottom-left', false); // vertical → sin punta
+      drawArrow(svg, document.getElementById("inicio"), document.getElementById("itinerario"), 'top-right', 'top-left', true); // horizontal → con punta
+      drawArrow(svg, document.getElementById("inicio"), document.getElementById("profundidad"), 'bottom-right', 'top-left', false); // vertical → sin punta
+      drawArrow(svg, document.getElementById("puntuales"), document.getElementById("itinerario"), 'bottom-right', 'top-left', true); // horizontal → con punta
+      drawArrow(svg, document.getElementById("profundidad"), document.getElementById("itinerario"), 'top-right', 'bottom-left', false); // vertical → sin punta
+      drawArrow(svg, document.getElementById("itinerario"), document.getElementById("servicios"), 'top-right', 'top-left', true); // horizontal → con punta
     }
 
     window.addEventListener("load", drawAllArrows);
