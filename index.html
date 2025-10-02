@@ -41,10 +41,12 @@
 
     main {
       flex: 1;
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* 2 columnas */
+      grid-template-rows: auto auto; /* 2 filas */
       gap: 2rem;
       justify-content: center;
-      align-items: flex-start;
+      align-items: start;
       padding: 2rem;
     }
 
@@ -53,12 +55,10 @@
       background: #f9f9f9;
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-      flex: 1;
+      padding: 1rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 1rem;
-      min-width: 250px;
     }
 
     .block h3 {
@@ -68,14 +68,33 @@
       text-align: center;
       font-size: 1.2rem;
       border-radius: 10px 10px 0 0;
+      width: 100%;
     }
 
     /* Colores de títulos */
-    .block.orientacion h3 { background: #e3cd66; }
-    .block.empresas h3 { background: #77b5c3; }
-    .block.migrantes h3 { background: #a5cca0; }
+    .orientacion h3 { background: #e3cd66; }
+    .empresas h3 { background: #77b5c3; }
+    .migrantes h3 { background: #a5cca0; }
 
-    /* Diagrama dentro del bloque de orientación */
+    /* Ubicación en la cuadrícula */
+    .orientacion { 
+      grid-column: 1; 
+      grid-row: 1; 
+      width: 110%; /* 10% más ancho */
+      justify-self: center;
+    }
+    .empresas { 
+      grid-column: 1; 
+      grid-row: 2; 
+      width: 100%;
+    }
+    .migrantes { 
+      grid-column: 2; 
+      grid-row: 1 / span 2; 
+      width: 100%;
+    }
+
+    /* Diagrama dentro del bloque orientación */
     .diagram {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
@@ -85,7 +104,7 @@
       align-items: center;
       position: relative;
       max-width: 900px;
-      margin: 0 auto;
+      margin: 0 auto; /* centrado */
     }
 
     .box {
@@ -128,8 +147,8 @@
   </header>
 
   <main>
-    <!-- Bloque de Proceso de Orientación -->
-    <div class="block orientacion" style="flex: 2;">
+    <!-- Proceso de Orientación -->
+    <div class="block orientacion">
       <h3>Proceso de Orientación</h3>
       <div class="diagram" id="diagram">
         <div class="box" id="inicio">Entrevista Inicial <br> de Orientación</div>
@@ -148,15 +167,15 @@
       </div>
     </div>
 
-    <!-- Bloque de Gestión con Empresas -->
-    <div class="block empresas">
-      <h3>Gestión con Empresas</h3>
+    <!-- Gestión con Migrantes -->
+    <div class="block migrantes">
+      <h3>Gestión con Personas Migrantes</h3>
       <p>Contenido en construcción</p>
     </div>
 
-    <!-- Bloque de Gestión con Personas Migrantes -->
-    <div class="block migrantes">
-      <h3>Gestión con Personas Migrantes</h3>
+    <!-- Gestión con Empresas -->
+    <div class="block empresas">
+      <h3>Gestión con Empresas</h3>
       <p>Contenido en construcción</p>
     </div>
   </main>
