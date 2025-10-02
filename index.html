@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Herramientas de apoyo para personal SAe en Oficinas de Empleo</title>
+  <title>Herramientas de apoyo para personal SAE en Oficinas de Empleo</title>
   <style>
     body {
       font-family: 'Open Sans', sans-serif;
@@ -27,7 +27,7 @@
       font-size: 1.1rem;
       font-weight: normal;
       margin: 0.3rem 0 0;
-      color: #e3cd66; /* color destacado para subtítulo */
+      color: #e3cd66;
     }
 
     footer {
@@ -41,9 +41,41 @@
 
     main {
       flex: 1;
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      align-items: flex-start;
       padding: 2rem;
     }
 
+    /* Bloques principales */
+    .block {
+      background: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+      min-width: 250px;
+    }
+
+    .block h3 {
+      margin: -1rem -1rem 1rem -1rem;
+      padding: 0.8rem;
+      color: #333;
+      text-align: center;
+      font-size: 1.2rem;
+      border-radius: 10px 10px 0 0;
+    }
+
+    /* Colores de títulos */
+    .block.orientacion h3 { background: #e3cd66; }
+    .block.empresas h3 { background: #77b5c3; }
+    .block.migrantes h3 { background: #a5cca0; }
+
+    /* Diagrama dentro del bloque de orientación */
     .diagram {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
@@ -52,8 +84,8 @@
       justify-items: center;
       align-items: center;
       position: relative;
-      max-width: 1000px;
-      margin: 2rem auto 0;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
     .box {
@@ -96,20 +128,36 @@
   </header>
 
   <main>
-    <div class="diagram" id="diagram">
-      <div class="box" id="inicio">Entrevista Inicial <br> de Orientación</div>
-      <div class="box" id="puntuales">Servicios <br> Puntuales</div>
-      <div class="box" id="profundidad">Entrevista <br>en Profundidad</div>
-      <div class="box" id="itinerario">Diseño de <br> Itinerario</div>
-      <div class="box" id="servicios">Desarrollo <br>de Servicios</div>
+    <!-- Bloque de Proceso de Orientación -->
+    <div class="block orientacion" style="flex: 2;">
+      <h3>Proceso de Orientación</h3>
+      <div class="diagram" id="diagram">
+        <div class="box" id="inicio">Entrevista Inicial <br> de Orientación</div>
+        <div class="box" id="puntuales">Servicios <br> Puntuales</div>
+        <div class="box" id="profundidad">Entrevista <br>en Profundidad</div>
+        <div class="box" id="itinerario">Diseño de <br> Itinerario</div>
+        <div class="box" id="servicios">Desarrollo <br>de Servicios</div>
 
-      <svg class="arrows">
-        <defs>
-          <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto" markerUnits="strokeWidth">
-            <polygon points="0 0, 12 4, 0 8" fill="#333" />
-          </marker>
-        </defs>
-      </svg>
+        <svg class="arrows">
+          <defs>
+            <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto" markerUnits="strokeWidth">
+              <polygon points="0 0, 12 4, 0 8" fill="#333" />
+            </marker>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Bloque de Gestión con Empresas -->
+    <div class="block empresas">
+      <h3>Gestión con Empresas</h3>
+      <p>Contenido en construcción</p>
+    </div>
+
+    <!-- Bloque de Gestión con Personas Migrantes -->
+    <div class="block migrantes">
+      <h3>Gestión con Personas Migrantes</h3>
+      <p>Contenido en construcción</p>
     </div>
   </main>
 
@@ -133,7 +181,6 @@
 
       let x1, y1, x2, y2;
 
-      // Coordenadas de inicio según esquina
       switch(fromCorner) {
         case 'top-right': x1 = from.right; y1 = from.top; break;
         case 'bottom-right': x1 = from.right; y1 = from.bottom; break;
@@ -142,7 +189,6 @@
         default: x1 = from.right; y1 = from.top + from.height/2;
       }
 
-      // Coordenadas de fin según esquina
       switch(toCorner) {
         case 'top-left': x2 = to.left; y2 = to.top; break;
         case 'bottom-left': x2 = to.left; y2 = to.bottom; break;
@@ -151,7 +197,6 @@
         default: x2 = to.left; y2 = to.top + to.height/2;
       }
 
-      // Control points para curva suave
       const cx1 = x1 + (x2-x1)/2;
       const cy1 = y1;
       const cx2 = x1 + (x2-x1)/2;
@@ -174,7 +219,6 @@
       const svg = document.querySelector("svg.arrows");
       const container = document.getElementById("diagram");
 
-      // Limpiar flechas existentes
       svg.innerHTML = `<defs>
         <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto" markerUnits="strokeWidth">
           <polygon points="0 0, 12 4, 0 8" fill="#333" />
@@ -185,7 +229,6 @@
       svg.setAttribute("height", container.offsetHeight);
       svg.setAttribute("viewBox", `0 0 ${container.offsetWidth} ${container.offsetHeight}`);
 
-      // Flechas verticales → sin punta, horizontales → con punta
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("puntuales"), 'top-right', 'left', false);
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("itinerario"), 'right', 'left', true);
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("profundidad"), 'bottom-right', 'left', false);
