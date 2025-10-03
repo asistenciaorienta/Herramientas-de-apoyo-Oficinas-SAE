@@ -142,6 +142,16 @@
       display: block;
       margin-bottom: 4rem; /* separa este div del que está debajo */
     }
+    .grid-imagenes {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 2 columnas iguales */
+      gap: 2rem; /* separación entre las imágenes */
+      text-align: center; /* centra texto bajo la imagen */
+    }
+    
+    .grid-imagenes img {
+      border-radius: 8px; /* opcional: esquinas redondeadas */
+    }    
   </style>
 </head>
 <body>
