@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <title>Herramientas de apoyo para personal SAE en Oficinas de Empleo</title>
   <style>
+    /* Box-sizing global */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    
     body {
       font-family: 'Open Sans', sans-serif;
       background: #ffffff;
@@ -12,7 +17,7 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      width: 100%
+      width: 100%;
     }
 
     header {
@@ -23,6 +28,7 @@
       font-size: 1.5rem;
       font-weight: bold;
       width: 100%
+      align-self: stretch; /* asegura que el flex hijo se estire */
     }
 
     header h2 {
@@ -40,6 +46,7 @@
       margin-top: auto;
       font-size: 1rem;
       width: 100%
+      align-self: stretch; /* asegura que el flex hijo se estire */
     }
 
     main {
