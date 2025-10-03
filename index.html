@@ -42,59 +42,37 @@
     main {
       flex: 1;
       display: grid;
-      grid-template-columns: 1fr 1fr; /* 2 columnas */
-      grid-template-rows: auto auto; /* 2 filas */
+      grid-template-columns: 2fr 1fr; /* izquierda más ancha que derecha */
+      grid-template-rows: auto auto; /* fila superior e inferior */
       gap: 2rem;
-      justify-content: center;
-      align-items: start;
       padding: 2rem;
     }
 
     /* Bloques principales */
-    .block {
-      background: #f9f9f9;
+    .section {
+      background: #f5f5f5;
+      border: 1px solid #ddd;
       border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
-    .block h3 {
-      margin: -1rem -1rem 1rem -1rem;
-      padding: 0.8rem;
-      color: #333;
-      text-align: center;
-      font-size: 1.2rem;
-      border-radius: 10px 10px 0 0;
-      width: 100%;
+    #orientacion {
+      grid-column: 1;
+      grid-row: 1;
     }
 
-    /* Colores de títulos */
-    .orientacion h3 { background: #e3cd66; }
-    .empresas h3 { background: #77b5c3; }
-    .migrantes h3 { background: #a5cca0; }
-
-    /* Ubicación en la cuadrícula */
-    .orientacion { 
-      grid-column: 1; 
-      grid-row: 1; 
-      width: 110%; /* 10% más ancho */
-      justify-self: center;
-    }
-    .empresas { 
-      grid-column: 1; 
-      grid-row: 2; 
-      width: 100%;
-    }
-    .migrantes { 
-      grid-column: 2; 
-      grid-row: 1 / span 2; 
-      width: 100%;
+    #migrantes {
+      grid-column: 2;
+      grid-row: 1;
     }
 
-    /* Diagrama dentro del bloque orientación */
+    #empresas {
+      grid-column: 1 / span 2; /* ocupa las dos columnas */
+      grid-row: 2;
+    }
+
+    /* Diagram dentro del bloque de orientación */
     .diagram {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
@@ -103,8 +81,9 @@
       justify-items: center;
       align-items: center;
       position: relative;
-      max-width: 900px;
-      margin: 0 auto; /* centrado */
+      width: 100%;
+      max-width: none; /* se adapta al contenedor padre sin límite */
+      margin: auto auto 0; /* margin: 2rem auto 0; */
     }
 
     .box {
@@ -120,9 +99,9 @@
     }
 
     #inicio { background: #087021; grid-column: 1; grid-row: 2; }
-    #puntuales { background: #e3cd66; color:#333; grid-column: 3; grid-row: 1; }
-    #profundidad { background: #a5cca0; color:#333; grid-column: 3; grid-row: 3; }
-    #itinerario { background: #77b5c3; grid-column: 5; grid-row: 2; }
+    #puntuales { background: #e3cd66; color:#333; grid-column: 3; grid-row: 1; } /* color amarillo */
+    #profundidad { background: #a5cca0; color:#333; grid-column: 3; grid-row: 3; } /* color verde claro */
+    #itinerario { background: #77b5c3; grid-column: 5; grid-row: 2; } /* color azul */
     #servicios { background: #087021; grid-column: 7; grid-row: 2; }
 
     svg.arrows {
@@ -143,12 +122,11 @@
 <body>
   <header>
     Herramientas de apoyo para personal SAE en Oficinas de Empleo
-    <h2>Herramientas para el Proceso de Orientación</h2>
   </header>
 
   <main>
-    <!-- Proceso de Orientación -->
-    <div class="block orientacion">
+    <!-- Bloque Proceso de Orientación -->
+    <section id="orientacion" class="section">
       <h3>Proceso de Orientación</h3>
       <div class="diagram" id="diagram">
         <div class="box" id="inicio">Entrevista Inicial <br> de Orientación</div>
@@ -165,19 +143,19 @@
           </defs>
         </svg>
       </div>
-    </div>
+    </section>
 
-    <!-- Gestión con Migrantes -->
-    <div class="block migrantes">
+    <!-- Bloque Migrantes -->
+    <section id="migrantes" class="section">
       <h3>Gestión con Personas Migrantes</h3>
-      <p>Contenido en construcción</p>
-    </div>
+      <p>Aquí irán los recursos, herramientas y procesos específicos para la atención a personas migrantes.</p>
+    </section>
 
-    <!-- Gestión con Empresas -->
-    <div class="block empresas">
+    <!-- Bloque Empresas -->
+    <section id="empresas" class="section">
       <h3>Gestión con Empresas</h3>
-      <p>Contenido en construcción</p>
-    </div>
+      <p>Aquí se recogerán las herramientas y procedimientos relacionados con la atención y gestión con empresas.</p>
+    </section>
   </main>
 
   <footer><br>© 2025 - Servicio Andaluz de Empleo. Junta de Andalucía<br></footer>
@@ -200,6 +178,7 @@
 
       let x1, y1, x2, y2;
 
+      // Coordenadas de inicio según esquina
       switch(fromCorner) {
         case 'top-right': x1 = from.right; y1 = from.top; break;
         case 'bottom-right': x1 = from.right; y1 = from.bottom; break;
@@ -208,6 +187,7 @@
         default: x1 = from.right; y1 = from.top + from.height/2;
       }
 
+      // Coordenadas de fin según esquina
       switch(toCorner) {
         case 'top-left': x2 = to.left; y2 = to.top; break;
         case 'bottom-left': x2 = to.left; y2 = to.bottom; break;
@@ -216,6 +196,7 @@
         default: x2 = to.left; y2 = to.top + to.height/2;
       }
 
+      // Control points para curva suave
       const cx1 = x1 + (x2-x1)/2;
       const cy1 = y1;
       const cx2 = x1 + (x2-x1)/2;
@@ -238,6 +219,7 @@
       const svg = document.querySelector("svg.arrows");
       const container = document.getElementById("diagram");
 
+      // Limpiar flechas existentes
       svg.innerHTML = `<defs>
         <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto" markerUnits="strokeWidth">
           <polygon points="0 0, 12 4, 0 8" fill="#333" />
@@ -248,6 +230,7 @@
       svg.setAttribute("height", container.offsetHeight);
       svg.setAttribute("viewBox", `0 0 ${container.offsetWidth} ${container.offsetHeight}`);
 
+      // Flechas verticales → sin punta, horizontales → con punta
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("puntuales"), 'top-right', 'left', false);
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("itinerario"), 'right', 'left', true);
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("profundidad"), 'bottom-right', 'left', false);
