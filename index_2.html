@@ -238,8 +238,28 @@
       from { opacity: 0; }
       to { opacity: 1; }
     }
+    
+    /* 💫 Animación especial para el QR */
+    .animarQR {
+      animation: slidePulse 0.8s ease-in-out;
+    }
+    
+    @keyframes slidePulse {
+      0% { transform: translateY(-30px) scale(0.8); opacity: 0; }
+      50% { transform: translateY(0) scale(1.05); opacity: 1; }
+      100% { transform: scale(1); }
+    }    
   
     /* 💬 Modal base */
+    /* 🎨 Colores temáticos */
+    .modal-verde .modal-content { border-top: 6px solid #2e8b57; }
+    .modal-amarillo .modal-content { border-top: 6px solid #e8b300; }
+    .modal-azul .modal-content { border-top: 6px solid #1e90ff; }
+    .modal-naranja .modal-content { border-top: 6px solid #ff8c00; }
+    .modal-morado .modal-content { border-top: 6px solid #8a2be2; }
+    .modal-celeste .modal-content { border-top: 6px solid #00bcd4; }
+    
+    /* 🧩 Fondo atenuado */
     .modal {
       display: none;
       position: fixed;
@@ -261,7 +281,9 @@
       border-radius: 16px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
       max-width: 600px;
+      width: 90%;
       text-align: center;
+      position: relative;
       animation: zoomIn 0.3s ease-in-out;
     }
     /* 🌈 Mejoras estéticas */
@@ -321,7 +343,8 @@
     </section>
     
     <!-- 🟡 MODALES -->
-    <div id="modal-inicio" class="modal">
+    <!-- 🟩 Modal EOI -->
+    <div id="modal-inicio" class="modal modal-verde">
       <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Entrevista Inicial de Orientación</h2>
@@ -329,7 +352,8 @@
       </div>
     </div>
     
-    <div id="modal-puntuales" class="modal">
+    <!-- 🟨 Modal Servicios Puntuales -->
+    <div id="modal-puntuales" class="modal modal-amarillo">
       <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Servicios Puntuales</h2>
@@ -337,7 +361,8 @@
       </div>
     </div>
     
-    <div id="modal-profundidad" class="modal">
+    <!-- 🟦 Modal Entrevista en Profundidad -->
+    <div id="modal-profundidad" class="modal modal-azul">
       <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Entrevista en Profundidad</h2>
@@ -345,7 +370,8 @@
       </div>
     </div>
     
-    <div id="modal-itinerario" class="modal">
+    <!-- 🟧 Modal Itinerario -->
+    <div id="modal-itinerario" class="modal modal-naranja">
       <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Diseño de Itinerario</h2>
@@ -353,7 +379,8 @@
       </div>
     </div>
     
-    <div id="modal-servicios" class="modal">
+    <!-- 🟪 Modal Servicios -->
+    <div id="modal-servicios" class="modal modal-morado">
       <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Desarrollo de Servicios</h2>
@@ -392,14 +419,14 @@
       </div>
     </section>
     
-    <!-- 🟣 MODAL QR -->
-    <div id="modal-qr" class="modal">
-      <div class="modal-content">
+    <!-- 💠 Modal QR -->
+    <div id="modal-qr" class="modal modal-celeste">
+      <div class="modal-content animarQR">
         <span class="close">&times;</span>
         <h2>QR para personas usuarias</h2>
         <img src="Imagenes/QR_guia_migrantes.png" 
              alt="Código QR Guía Migrantes" 
-             style="max-width: 100%; height: auto; border-radius: 12px; margin-top: 10px;">
+             style="max-width: 60%; height: auto; border-radius: 12px; margin-top: 10px;">
         <p style="margin-top: 10px;">Escanea este código para acceder directamente a la Guía Interactiva de Empleo para personas migrantes.</p>
       </div>
     </div>
