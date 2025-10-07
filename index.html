@@ -198,8 +198,14 @@
           <img src="Imagenes/Guia_Empleo_Migrates.png" 
                alt="Guía Interactiva de Empleo. Personas Migrantes en Andalucía" 
                style="max-width: 100%; height: auto; cursor: pointer;">
-          <p>Guía Interactiva de Empleo.<br>Personas Migrantes en Andalucía.</p>
         </a>
+        <p>Guía Interactiva de Empleo.<br>Personas Migrantes en Andalucía.</p>
+        <!-- Enlace para abrir QR -->
+        <p>
+          <a href="#" id="abrirQR" style="color: #2a6db3; text-decoration: underline; cursor: pointer;">
+            📱 QR para personas usuarias
+          </a>
+        </p>  
       </div>
   
       <div>
@@ -212,7 +218,17 @@
       </div>
     </div>
   </section>
-
+  
+  <!-- Modal QR -->
+  <div id="modalQR" class="modal">
+    <div class="modal-content">
+      <span class="cerrar" id="cerrarQR">&times;</span>
+      <img src="Imagenes/QR_guia_migrantes.png" 
+           alt="Código QR Guía Migrantes" 
+           style="max-width: 100%; height: auto;">
+    </div>
+  </div>
+  
   <!-- Bloque Empresas -->
   <section id="empresas" class="section">
     <div class="section-title">Gestión con Empresas</div>
