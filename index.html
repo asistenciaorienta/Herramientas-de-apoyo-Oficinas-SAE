@@ -158,7 +158,54 @@
       padding: 1rem;            /* espacio interior para que no se pegue */
       background: #fff;         /* opcional: fondo blanco */
       box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* opcional: ligera sombra */
-    }    
+    }
+  .grid-imagenes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .grid-imagenes > div {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 1rem;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  /* Modal (ventana emergente) */
+  .modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    position: relative;
+  }
+
+  .cerrar {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: #aaa;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .cerrar:hover {
+    color: #000;
+  }
   </style>
 </head>
 <body>
@@ -323,6 +370,25 @@
 
     window.addEventListener("load", drawAllArrows);
     window.addEventListener("resize", drawAllArrows);
+    
+    const abrirQR = document.getElementById('abrirQR');    
+    const modalQR = document.getElementById('modalQR');
+    const cerrarQR = document.getElementById('cerrarQR');
+  
+    abrirQR.addEventListener('click', (e) => {
+      e.preventDefault();
+      modalQR.style.display = 'block';
+    });
+  
+    cerrarQR.addEventListener('click', () => {
+      modalQR.style.display = 'none';
+    });
+  
+    window.addEventListener('click', (e) => {
+      if (e.target === modalQR) {
+        modalQR.style.display = 'none';
+      }
+    });
   </script>
 </body>
 </html>
