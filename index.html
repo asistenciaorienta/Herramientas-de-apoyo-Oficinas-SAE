@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <title>Herramientas de apoyo para personal SAE en Oficinas de Empleo</title>
   <style>
     /* Box-sizing global */
@@ -10,8 +11,9 @@
     }
     
     body {
-      font-family: 'Open Sans', sans-serif;
+      font-family: "Poppins", "Segoe UI", sans-serif;
       background: #ffffff;
+      line-height: 1.6;
       margin: 0;
       padding: 0;
       display: flex;
@@ -21,18 +23,32 @@
     }
 
     header {
-      background-color: #087021;
-      color: #ffffff;
+      position: relative;             /* Para poder posicionar elementos dentro */
+      display: flex;
+      align-items: center;       /* Centra verticalmente */
+      justify-content: center;        /* Centra el texto en toda la cabecera */
+      background-color: #087021; /* Fondo verde institucional */
+      color: white;
+      padding: 1rem 2rem; /* padding: 1rem 0; */
+    }
+    
+    header img.logo-sae {
+      position: absolute; 
+      max-height: 60px;          /* Controla la altura máxima del logo */
+      height: auto;
+      width: auto;
+      left: 1rem;       /* Pequeño margen izquierdo */
+    }
+    
+    header h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin: 0; /*margin: 0.3rem 0 0;*/
       text-align: center;
-      padding: 1rem 0;
-      font-size: 1.4rem;
-      font-weight: bold;
-      width: 100%;
-      align-self: stretch; /* asegura que el flex hijo se estire */
     }
 
     header h2 {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: bold;
       margin: 0.3rem 0 0;
       color: #e3cd66;
@@ -66,24 +82,48 @@
       padding: 1.5rem;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
-
+    
+    .section-title {
+      color: #333;
+      font-weight: 600; 
+      text-align: center;
+      padding: 0.5rem 0; /* altura del “título” */
+      border-radius: 5px 5px 0 0; /* bordes redondeados solo arriba */
+      width: 100%;
+      display: block;      
+      margin-bottom: 1.5rem; /* separa este div del que está debajo */
+      font-size: 1.2rem;
+      text-align: center;
+      border-radius: 12px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);      
+    }
+    
+    .section p {
+      font-size: 1.05rem;
+      color: #444;
+      margin-top: 0.5rem;
+    }
+    
     #orientacion {
       grid-column: 1;
       grid-row: 1;
+      margin: 1rem auto 0 auto;
     }
-    #orientacion .section-title { background-color: #e3cd66; }
+    #orientacion .section-title { 
+      background: linear-gradient(135deg, #e3cd66, #F5E784); }
 
     #migrantes {
       grid-column: 2;
       grid-row: 1;
     }
-    #migrantes .section-title { background-color: #a5cca0; }
+    #migrantes .section-title { background: linear-gradient(135deg, #a5cca0, #D8F2D5); }
 
     #empresas {
       grid-column: 1 / span 2; /* ocupa las dos columnas */
       grid-row: 2;
     }
-    #empresas .section-title { background-color: #77b5c3; }
+    #empresas .section-title { background: linear-gradient(135deg, #77b5c3, #ACDDE8); }
 
 
     /* Diagram dentro del bloque de orientación */
@@ -97,7 +137,7 @@
       position: relative;
       width: 100%;
       max-width: none; /* se adapta al contenedor padre sin límite */
-      margin: auto auto 0; /* margin: 2rem auto 0; */
+      margin: 4rem auto auto 0;
     }
 
     .box {
@@ -110,7 +150,14 @@
       width: 200px;
       position: relative;
       z-index: 1;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
+  
+    .box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+    }    
 
     #inicio { background: #087021; grid-column: 1; grid-row: 2; }
     #puntuales { background: #e3cd66; color:#333; grid-column: 3; grid-row: 1; } /* color amarillo */
@@ -131,161 +178,270 @@
       stroke-width: 2;
       fill: none;
     }
-    
-    .section-title {
-      color: #333;
-      font-weight: bold;
-      text-align: center;
-      padding: 0.5rem 0; /* altura del “título” */
-      border-radius: 5px 5px 0 0; /* bordes redondeados solo arriba */
-      width: 100%;
-      display: block;
-      margin-bottom: 4rem; /* separa este div del que está debajo */
-    }
+   
     .grid-imagenes {
       display: grid;
       grid-template-columns: repeat(2, 1fr); /* 2 columnas iguales */
       gap: 2rem; /* separación entre las imágenes */
       text-align: center; /* centra texto bajo la imagen */
+      padding: 0.5rem;
+      margin: 3rem auto auto 0;
+    }
+   
+    .grid-imagenes img {
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .grid-imagenes img:hover {
+      transform: scale(1.05);
+    }
+        
+    .grid-imagenes > div {
+      border: 1px solid #e0e0e0;  /* borde finito */
+      border-radius: 16px;       /* esquinas redondeadas */
+      padding: 1rem;            /* espacio interior para que no se pegue */
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .grid-imagenes > div:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
     
-    .grid-imagenes img {
-      border-radius: 8px; /* opcional: esquinas redondeadas */
-    }    
-    .grid-imagenes > div {
-      border: 1px solid #ccc;   /* borde finito gris */
-      border-radius: 8px;       /* esquinas redondeadas */
-      padding: 1rem;            /* espacio interior para que no se pegue */
-      background: #fff;         /* opcional: fondo blanco */
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* opcional: ligera sombra */
+    /* --------- ENLACES --------- */
+    a {
+      color: #3b82f6;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
     }
-  .grid-imagenes {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    text-align: center;
-  }
+    
+    a:hover {
+      color: #1e40af;
+      text-shadow: 0 0 6px rgba(59,130,246,0.3);
+    }
+    
+    @keyframes aparecer {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }    
 
-  .grid-imagenes > div {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 1rem;
-    background: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-
-  /* Modal (ventana emergente) */
-  .modal {
-    display: none; 
-    position: fixed;
-    z-index: 1000;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.5);
-  }
-
-  .modal-content {
-    background-color: #fefefe;
-    margin: 10% auto;
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-    text-align: center;
-    position: relative;
-  }
-
-  .cerrar {
-    position: absolute;
-    top: 8px;
-    right: 12px;
-    color: #aaa;
-    font-size: 24px;
-    cursor: pointer;
-  }
-
-  .cerrar:hover {
-    color: #000;
-  }
+    /* 🧩 Animaciones */
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    /* 💫 Animación especial para el QR */
+    .animarQR {
+      animation: slidePulse 0.8s ease-in-out;
+    }
+    
+    @keyframes slidePulse {
+      0% { transform: translateY(-30px) scale(0.8); opacity: 0; }
+      50% { transform: translateY(0) scale(1.05); opacity: 1; }
+      100% { transform: scale(1); }
+    }    
+  
+    /* 💬 Modal base */
+    /* 🎨 Colores temáticos */
+    .modal-verde .modal-content { border-top: 6px solid #2e8b57; }
+    .modal-amarillo .modal-content { border-top: 6px solid #e8b300; }
+    .modal-azul .modal-content { border-top: 6px solid #1e90ff; }
+    .modal-naranja .modal-content { border-top: 6px solid #ff8c00; }
+    .modal-morado .modal-content { border-top: 6px solid #8a2be2; }
+    .modal-celeste .modal-content { border-top: 6px solid #00bcd4; }
+    
+    /* 🧩 Fondo atenuado */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+  
+    /* 📦 Contenido de la ventana */
+    .modal-content {
+      background: #fff;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      max-width: 600px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      animation: zoomIn 0.3s ease-in-out;
+    }
+    /* 🌈 Mejoras estéticas */
+    .modal-content h2 {
+      margin-top: 0;
+      color: #2a6db3;
+    }    
+    .modal-content p {
+      color: #333;
+      line-height: 1.6;
+    }  
+  
+    /* ❌ Botón cerrar */
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 25px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #555;
+      transition: transform 0.2s;
+    }
+    
+    .close:hover {
+      transform: scale(1.2);
+      color: #000;
+    }
+    
   </style>
 </head>
 <body>
   <header>
-  <h1>Herramientas de apoyo para personal SAE</h1>
-  <h2>Oficinas de Empleo</h2>
+    <img src="Imagenes/logo_blanco_transparente.png" 
+         alt="Logo Servicio Andaluz de Empleo. Junta de Andalucía" 
+         class="logo-sae">
+    <h1>Herramientas de apoyo para personal SAE</h1>
   </header>
-
-<main>
-  <!-- Bloque Proceso de Orientación -->
-  <section id="orientacion" class="section">
-    <div class="section-title">Proceso de Orientación</div>
-    <div class="diagram" id="diagram">
-      <div class="box" id="inicio">EOI<br>Entrevista Inicial <br> de Orientación</div>
-      <div class="box" id="puntuales">Servicios <br> Puntuales</div>
-      <div class="box" id="profundidad">Entrevista <br>en Profundidad</div>
-      <div class="box" id="itinerario">Diseño de <br> Itinerario</div>
-      <div class="box" id="servicios">Desarrollo <br>de Servicios</div>
-
-      <svg class="arrows">
-        <defs>
-          <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto" markerUnits="strokeWidth">
-            <polygon points="0 0, 12 4, 0 8" fill="#333" />
-          </marker>
-        </defs>
-      </svg>
+  <main>
+    <!-- 🟢 BLOQUE: PROCESO DE ORIENTACIÓN -->
+    <section id="orientacion" class="section">
+      <div class="section-title">Proceso de Orientación</div>
+      <div class="diagram" id="diagram">
+        <div class="box" id="inicio" data-modal="modal-inicio">EOI<br>Entrevista Inicial <br> de Orientación</div>
+        <div class="box" id="puntuales" data-modal="modal-puntuales">Servicios <br> Puntuales</div>
+        <div class="box" id="profundidad" data-modal="modal-profundidad">Entrevista <br>en Profundidad</div>
+        <div class="box" id="itinerario" data-modal="modal-itinerario">Diseño de <br> Itinerario</div>
+        <div class="box" id="servicios" data-modal="modal-servicios">Desarrollo <br>de Servicios</div>
+    
+        <svg class="arrows">
+          <defs>
+            <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto" markerUnits="strokeWidth">
+              <polygon points="0 0, 12 4, 0 8" fill="#333" />
+            </marker>
+          </defs>
+        </svg>
+      </div>
+    </section>
+    
+    <!-- 🟡 MODALES -->
+    <!-- 🟩 Modal EOI -->
+    <div id="modal-inicio" class="modal modal-verde">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Entrevista Inicial de Orientación</h2>
+        <p>Próximamente se incluirá aquí el contenido detallado de esta fase.</p>
+      </div>
     </div>
-  </section>
-
-  <!-- Bloque Migrantes -->
-  <section id="migrantes" class="section">
-    <div class="section-title">Gestión con Personas Migrantes</div>
-    <!-- Contenedor en 2 columnas -->
-    <div class="grid-imagenes">
-      <div>
-        <a href="https://view.genially.com/665d7760db0cdf0014210799" target="_blank">
-          <img src="Imagenes/Guia_Empleo_Migrates.png" 
-               alt="Guía Interactiva de Empleo. Personas Migrantes en Andalucía" 
-               style="max-width: 100%; height: auto; cursor: pointer;">
-        </a>
-        <p>Guía Interactiva de Empleo.<br>Personas Migrantes en Andalucía.</p>
-        <!-- Enlace para abrir QR -->
-        <p>
-          <a href="#" id="abrirQR" style="color: #2a6db3; text-decoration: underline; cursor: pointer;">
-            📱 QR para personas usuarias
+    
+    <!-- 🟨 Modal Servicios Puntuales -->
+    <div id="modal-puntuales" class="modal modal-amarillo">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Servicios Puntuales</h2>
+        <p>Contenido en preparación...</p>
+      </div>
+    </div>
+    
+    <!-- 🟦 Modal Entrevista en Profundidad -->
+    <div id="modal-profundidad" class="modal modal-azul">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Entrevista en Profundidad</h2>
+        <p>Contenido en preparación...</p>
+      </div>
+    </div>
+    
+    <!-- 🟧 Modal Itinerario -->
+    <div id="modal-itinerario" class="modal modal-naranja">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Diseño de Itinerario</h2>
+        <p>Contenido en preparación...</p>
+      </div>
+    </div>
+    
+    <!-- 🟪 Modal Servicios -->
+    <div id="modal-servicios" class="modal modal-morado">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Desarrollo de Servicios</h2>
+        <p>Contenido en preparación...</p>
+      </div>
+    </div>
+  
+    <!-- Bloque Migrantes -->
+    <section id="migrantes" class="section">
+      <div class="section-title">Gestión con Personas Migrantes</div>
+      <!-- Contenedor en 2 columnas -->
+      <div class="grid-imagenes">
+        <div>
+          <a href="https://view.genially.com/665d7760db0cdf0014210799" target="_blank">
+            <img src="Imagenes/Guia_Empleo_Migrates.png" 
+                 alt="Guía Interactiva de Empleo. Personas Migrantes en Andalucía" 
+                 style="max-width: 100%; height: auto; cursor: pointer;">
           </a>
-        </p>  
+          <p>Guía Interactiva de Empleo.<br>Personas Migrantes en Andalucía.</p>
+          <!-- Enlace para abrir QR -->
+          <p>
+            <a href="#" id="abrirQR" style="color: #2a6db3; text-decoration: underline; cursor: pointer;">
+              📱 QR para personas usuarias
+            </a>
+          </p>  
+        </div>
+    
+        <div>
+          <a href="https://asistenciaorienta.github.io/SituacionesAdministrativas/" target="_blank">
+            <img src="Imagenes/Ayuda_SILA_Migrantes.png" 
+                 alt="Ayuda para el registro en SILA de una persona migrante" 
+                 style="max-width: 100%; height: auto; cursor: pointer;">
+          </a>
+          <p>Ayuda para el <b>registro en SILA</b> de una persona migrante.</p>
+        </div>
       </div>
-  
+    </section>
+    
+    <!-- 💠 Modal QR -->
+    <div id="modal-qr" class="modal modal-celeste">
+      <div class="modal-content animarQR">
+        <span class="close">&times;</span>
+        <h2>QR para personas usuarias</h2>
+        <img src="Imagenes/QR_guia_migrantes.png" 
+             alt="Código QR Guía Migrantes" 
+             style="max-width: 60%; height: auto; border-radius: 12px; margin-top: 10px;">
+        <p style="margin-top: 10px;">Escanea este código para acceder directamente a la Guía Interactiva de Empleo para personas migrantes.</p>
+      </div>
+    </div>
+    
+    <!-- Bloque Empresas -->
+    <section id="empresas" class="section">
+      <div class="section-title">Gestión con Empresas</div>
       <div>
-        <a href="https://view.genially.com/665d7760db0cdf0014210799" target="_blank">
-          <img src="Imagenes/Ayuda_SILA_Migrantes.png" 
-               alt="Ayuda para el registro en SILA de una persona migrante" 
-               style="max-width: 100%; height: auto; cursor: pointer;">
-          <p>Ayuda para el registro en SILA<br>de una persona migrante.</p>
+        <a href="https://chatgpt.com/g/g-68dcd5d94ab48191a6b5bdb9fd31c2f6-prueba-gpt-empresas" target="_blank">
+          Consultorio sobre Contratos y Convenios.
         </a>
       </div>
-    </div>
-  </section>
-  
-  <!-- Modal QR -->
-  <div id="modalQR" class="modal">
-    <div class="modal-content">
-      <span class="cerrar" id="cerrarQR">&times;</span>
-      <img src="Imagenes/QR_guia_migrantes.png" 
-           alt="Código QR Guía Migrantes" 
-           style="max-width: 100%; height: auto;">
-    </div>
-  </div>
-  
-  <!-- Bloque Empresas -->
-  <section id="empresas" class="section">
-    <div class="section-title">Gestión con Empresas</div>
-    <div>
-      <a href="https://chatgpt.com/g/g-68dcd5d94ab48191a6b5bdb9fd31c2f6-prueba-gpt-empresas" target="_blank">
-        Consultorio sobre Contratos y Convenios.
-      </a>
-    </div>
-  </section>
-</main>
+    </section>
+  </main>
 
   <footer>© 2025 - Servicio Andaluz de Empleo. Junta de Andalucía</footer>
 
@@ -370,25 +526,36 @@
 
     window.addEventListener("load", drawAllArrows);
     window.addEventListener("resize", drawAllArrows);
+  
+    // --- MODALES GENERALES ---
+      document.querySelectorAll('.box').forEach(box => {
+        box.addEventListener('click', () => {
+          const modalId = box.getAttribute('data-modal');
+          const modal = document.getElementById(modalId);
+          if (modal) modal.style.display = 'flex';
+        });
+      });
     
-    const abrirQR = document.getElementById('abrirQR');    
-    const modalQR = document.getElementById('modalQR');
-    const cerrarQR = document.getElementById('cerrarQR');
-  
-    abrirQR.addEventListener('click', (e) => {
-      e.preventDefault();
-      modalQR.style.display = 'block';
-    });
-  
-    cerrarQR.addEventListener('click', () => {
-      modalQR.style.display = 'none';
-    });
-  
-    window.addEventListener('click', (e) => {
-      if (e.target === modalQR) {
-        modalQR.style.display = 'none';
-      }
-    });
+      document.querySelectorAll('.close').forEach(btn => {
+        btn.addEventListener('click', () => {
+          btn.closest('.modal').style.display = 'none';
+        });
+      });
+    
+      window.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal')) {
+          e.target.style.display = 'none';
+        }
+      });
+    
+      // --- MODAL QR ---
+      const modalQR = document.getElementById('modal-qr');
+      const abrirQR = document.getElementById('abrirQR');
+    
+      abrirQR.addEventListener('click', (e) => {
+        e.preventDefault();
+        modalQR.style.display = 'flex';
+      });  
   </script>
 </body>
 </html>
