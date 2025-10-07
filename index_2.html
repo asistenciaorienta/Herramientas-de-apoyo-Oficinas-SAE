@@ -30,7 +30,7 @@
       align-self: stretch; /* asegura que el flex hijo se estire */
     }
     header h1 {
-      font-size: 1.4rem;
+      font-size: 2rem; /*1.4*/
       font-weight: 600;
       margin: 0.3rem 0 0;
       color: #fff;
@@ -124,7 +124,7 @@
       position: relative;
       width: 100%;
       max-width: none; /* se adapta al contenedor padre sin límite */
-      margin: 2rem auto auto 0; /* margin: 2rem auto 0; */
+      margin: 4rem auto auto 0;
     }
 
     .box {
@@ -165,6 +165,7 @@
       gap: 2rem; /* separación entre las imágenes */
       text-align: center; /* centra texto bajo la imagen */
       padding: 0.5rem;
+      margin: 4rem auto auto 0;
     }
    
     .grid-imagenes img {
@@ -246,82 +247,82 @@
 </head>
 <body>
   <header>
-  <h1>Herramientas de apoyo para personal SAE</h1>
-  <h2>Oficinas de Empleo</h2>
+    <h1>Herramientas de apoyo para personal SAE</h1>
+    <!--<h2>Oficinas de Empleo</h2>-->
+    <img src="Imagenes/logo_blanco_transparente.png" alt="Logo Servicio Andaluz de Empleo. Junta de Andalucía" style="max-width: 30%; height: auto; cursor: pointer;">
   </header>
-
-<main>
-  <!-- Bloque Proceso de Orientación -->
-  <section id="orientacion" class="section">
-    <div class="section-title">Proceso de Orientación</div>
-    <div class="diagram" id="diagram">
-      <div class="box" id="inicio">EOI<br>Entrevista Inicial <br> de Orientación</div>
-      <div class="box" id="puntuales">Servicios <br> Puntuales</div>
-      <div class="box" id="profundidad">Entrevista <br>en Profundidad</div>
-      <div class="box" id="itinerario">Diseño de <br> Itinerario</div>
-      <div class="box" id="servicios">Desarrollo <br>de Servicios</div>
-
-      <svg class="arrows">
-        <defs>
-          <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto" markerUnits="strokeWidth">
-            <polygon points="0 0, 12 4, 0 8" fill="#333" />
-          </marker>
-        </defs>
-      </svg>
-    </div>
-  </section>
-
-  <!-- Bloque Migrantes -->
-  <section id="migrantes" class="section">
-    <div class="section-title">Gestión con Personas Migrantes</div>
-    <!-- Contenedor en 2 columnas -->
-    <div class="grid-imagenes">
-      <div>
-        <a href="https://view.genially.com/665d7760db0cdf0014210799" target="_blank">
-          <img src="Imagenes/Guia_Empleo_Migrates.png" 
-               alt="Guía Interactiva de Empleo. Personas Migrantes en Andalucía" 
-               style="max-width: 100%; height: auto; cursor: pointer;">
-        </a>
-        <p>Guía Interactiva de Empleo.<br>Personas Migrantes en Andalucía.</p>
-        <!-- Enlace para abrir QR -->
-        <p>
-          <a href="#" id="abrirQR" style="color: #2a6db3; text-decoration: underline; cursor: pointer;">
-            📱 QR para personas usuarias
+  <main>
+    <!-- Bloque Proceso de Orientación -->
+    <section id="orientacion" class="section">
+      <div class="section-title">Proceso de Orientación</div>
+      <div class="diagram" id="diagram">
+        <div class="box" id="inicio">EOI<br>Entrevista Inicial <br> de Orientación</div>
+        <div class="box" id="puntuales">Servicios <br> Puntuales</div>
+        <div class="box" id="profundidad">Entrevista <br>en Profundidad</div>
+        <div class="box" id="itinerario">Diseño de <br> Itinerario</div>
+        <div class="box" id="servicios">Desarrollo <br>de Servicios</div>
+  
+        <svg class="arrows">
+          <defs>
+            <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto" markerUnits="strokeWidth">
+              <polygon points="0 0, 12 4, 0 8" fill="#333" />
+            </marker>
+          </defs>
+        </svg>
+      </div>
+    </section>
+  
+    <!-- Bloque Migrantes -->
+    <section id="migrantes" class="section">
+      <div class="section-title">Gestión con Personas Migrantes</div>
+      <!-- Contenedor en 2 columnas -->
+      <div class="grid-imagenes">
+        <div>
+          <a href="https://view.genially.com/665d7760db0cdf0014210799" target="_blank">
+            <img src="Imagenes/Guia_Empleo_Migrates.png" 
+                 alt="Guía Interactiva de Empleo. Personas Migrantes en Andalucía" 
+                 style="max-width: 100%; height: auto; cursor: pointer;">
           </a>
-        </p>  
+          <p>Guía Interactiva de Empleo.<br>Personas Migrantes en Andalucía.</p>
+          <!-- Enlace para abrir QR -->
+          <p>
+            <a href="#" id="abrirQR" style="color: #2a6db3; text-decoration: underline; cursor: pointer;">
+              📱 QR para personas usuarias
+            </a>
+          </p>  
+        </div>
+    
+        <div>
+          <a href="https://asistenciaorienta.github.io/SituacionesAdministrativas/" target="_blank">
+            <img src="Imagenes/Ayuda_SILA_Migrantes.png" 
+                 alt="Ayuda para el registro en SILA de una persona migrante" 
+                 style="max-width: 100%; height: auto; cursor: pointer;">
+          </a>
+          <p>Ayuda para el <b>registro en SILA</b> de una persona migrante.</p>
+        </div>
       </div>
-  
+    </section>
+    
+    <!-- Modal QR -->
+    <div id="modalQR" class="modal">
+      <div class="modal-content">
+        <span class="cerrar" id="cerrarQR">&times;</span>
+        <img src="Imagenes/QR_guia_migrantes.png" 
+             alt="Código QR Guía Migrantes" 
+             style="max-width: 100%; height: auto;">
+      </div>
+    </div>
+    
+    <!-- Bloque Empresas -->
+    <section id="empresas" class="section">
+      <div class="section-title">Gestión con Empresas</div>
       <div>
-        <a href="https://asistenciaorienta.github.io/SituacionesAdministrativas/" target="_blank">
-          <img src="Imagenes/Ayuda_SILA_Migrantes.png" 
-               alt="Ayuda para el registro en SILA de una persona migrante" 
-               style="max-width: 100%; height: auto; cursor: pointer;">
+        <a href="https://chatgpt.com/g/g-68dcd5d94ab48191a6b5bdb9fd31c2f6-prueba-gpt-empresas" target="_blank">
+          Consultorio sobre Contratos y Convenios.
         </a>
-        <p>Ayuda para el <b>registro en SILA</b> de una persona migrante.</p>
       </div>
-    </div>
-  </section>
-  
-  <!-- Modal QR -->
-  <div id="modalQR" class="modal">
-    <div class="modal-content">
-      <span class="cerrar" id="cerrarQR">&times;</span>
-      <img src="Imagenes/QR_guia_migrantes.png" 
-           alt="Código QR Guía Migrantes" 
-           style="max-width: 100%; height: auto;">
-    </div>
-  </div>
-  
-  <!-- Bloque Empresas -->
-  <section id="empresas" class="section">
-    <div class="section-title">Gestión con Empresas</div>
-    <div>
-      <a href="https://chatgpt.com/g/g-68dcd5d94ab48191a6b5bdb9fd31c2f6-prueba-gpt-empresas" target="_blank">
-        Consultorio sobre Contratos y Convenios.
-      </a>
-    </div>
-  </section>
-</main>
+    </section>
+  </main>
 
   <footer>© 2025 - Servicio Andaluz de Empleo. Junta de Andalucía</footer>
 
