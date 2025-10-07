@@ -24,15 +24,17 @@
 
     header {
       background-color: #087021;
-      color: #ffffff;
       text-align: center;
       padding: 1rem 0;
-      font-size: 1.4rem;
-      font-weight: bold;
       width: 100%;
       align-self: stretch; /* asegura que el flex hijo se estire */
     }
-
+    header h1 {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin: 0.3rem 0 0;
+      color: #fff;
+    }
     header h2 {
       font-size: 1.1rem;
       font-weight: bold;
@@ -162,9 +164,9 @@
       grid-template-columns: repeat(2, 1fr); /* 2 columnas iguales */
       gap: 2rem; /* separación entre las imágenes */
       text-align: center; /* centra texto bajo la imagen */
-      padding: 1rem;
+      padding: 0.5rem;
     }
-    
+   
     .grid-imagenes img {
       border-radius: 12px;
       transition: transform 0.3s ease;
@@ -176,7 +178,7 @@
         
     .grid-imagenes > div {
       border: 1px solid #e0e0e0;  /* borde finito */
-      border-radius: 165px;       /* esquinas redondeadas */
+      border-radius: 16px;       /* esquinas redondeadas */
       padding: 1rem;            /* espacio interior para que no se pegue */
       background: white;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
