@@ -23,18 +23,29 @@
     }
 
     header {
-      background-color: #087021;
-      text-align: center;
-      padding: 1rem 0;
-      width: 100%;
-      align-self: stretch; /* asegura que el flex hijo se estire */
+      display: flex;
+      align-items: center;       /* Centra verticalmente */
+      justify-content: center;   /* Centra horizontalmente todo el contenido */
+      gap: 1rem;                 /* Espacio entre el logo y el texto */
+      background-color: #087021; /* Fondo verde institucional */
+      color: white;
+      padding: 1rem 2rem; /* padding: 1rem 0; */
+      text-align: center;      
+      /*align-self: stretch;  asegura que el flex hijo se estire */
     }
+    
+    header img.logo-sae {
+      max-height: 60px;          /* Controla la altura máxima del logo */
+      height: auto;
+      width: auto;
+    }
+    
     header h1 {
-      font-size: 2rem; /*1.4*/
+      font-size: 2rem;
       font-weight: 600;
-      margin: 0.3rem 0 0;
-      color: #fff;
+      margin: 0; /*margin: 0.3rem 0 0;*/
     }
+
     header h2 {
       font-size: 1.2rem;
       font-weight: bold;
@@ -165,7 +176,7 @@
       gap: 2rem; /* separación entre las imágenes */
       text-align: center; /* centra texto bajo la imagen */
       padding: 0.5rem;
-      margin: 4rem auto auto 0;
+      margin: 2rem auto auto 0;
     }
    
     .grid-imagenes img {
@@ -247,9 +258,10 @@
 </head>
 <body>
   <header>
+    <img src="Imagenes/logo_blanco_transparente.png" 
+         alt="Logo Servicio Andaluz de Empleo. Junta de Andalucía" 
+         class="logo-sae">
     <h1>Herramientas de apoyo para personal SAE</h1>
-    <!--<h2>Oficinas de Empleo</h2>-->
-    <img src="Imagenes/logo_blanco_transparente.png" alt="Logo Servicio Andaluz de Empleo. Junta de Andalucía" style="max-width: 30%; height: auto; cursor: pointer;">
   </header>
   <main>
     <!-- Bloque Proceso de Orientación -->
