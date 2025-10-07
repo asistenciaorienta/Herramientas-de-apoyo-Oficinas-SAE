@@ -241,70 +241,55 @@
   
     /* 💬 Modal base */
     .modal {
-      display: none; 
+      display: none;
       position: fixed;
       z-index: 1000;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0,0,0,0.6);
-      animation: fadeIn 0.3s ease;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
       justify-content: center;
       align-items: center;
+      animation: fadeIn 0.3s ease-in-out;
     }
   
     /* 📦 Contenido de la ventana */
     .modal-content {
-      background: #ffffff;
-      border-radius: 15px;
-      padding: 2rem;
+      background: #fff;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
       max-width: 600px;
-      width: 80%;
       text-align: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-      position: relative;
-      animation: zoomIn 0.4s ease;
+      animation: zoomIn 0.3s ease-in-out;
     }
+    /* 🌈 Mejoras estéticas */
+    .modal-content h2 {
+      margin-top: 0;
+      color: #2a6db3;
+    }    
+    .modal-content p {
+      color: #333;
+      line-height: 1.6;
+    }  
   
     /* ❌ Botón cerrar */
     .close {
       position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #087021;
-      cursor: pointer;
-    }
-  
-    .close:hover {
-      color: #e3cd66;
-      transform: scale(1.2);
-      transition: 0.2s;
-    }
- 
-    .cerrar {
-      position: absolute;
-      top: 8px;
-      right: 12px;
-      color: #aaa;
+      top: 15px;
+      right: 25px;
       font-size: 24px;
       cursor: pointer;
+      color: #555;
+      transition: transform 0.2s;
     }
-  
-    .cerrar:hover {
+    
+    .close:hover {
+      transform: scale(1.2);
       color: #000;
-    }    
-  
-    /* 🌈 Mejoras estéticas */
-    .modal-content h2 {
-      color: #087021;
-      margin-bottom: 1rem;
     }
-  
-    .modal-content p {
-      color: #333;
-      line-height: 1.6;
-    }    
+    
   </style>
 </head>
 <body>
@@ -407,13 +392,15 @@
       </div>
     </section>
     
-    <!-- Modal QR -->
-    <div id="modalQR" class="modal">
+    <!-- 🟣 MODAL QR -->
+    <div id="modal-qr" class="modal">
       <div class="modal-content">
-        <span class="cerrar" id="cerrarQR">&times;</span>
+        <span class="close">&times;</span>
+        <h2>QR para personas usuarias</h2>
         <img src="Imagenes/QR_guia_migrantes.png" 
              alt="Código QR Guía Migrantes" 
-             style="max-width: 100%; height: auto;">
+             style="max-width: 100%; height: auto; border-radius: 12px; margin-top: 10px;">
+        <p style="margin-top: 10px;">Escanea este código para acceder directamente a la Guía Interactiva de Empleo para personas migrantes.</p>
       </div>
     </div>
     
@@ -511,48 +498,36 @@
 
     window.addEventListener("load", drawAllArrows);
     window.addEventListener("resize", drawAllArrows);
-    
-    const abrirQR = document.getElementById('abrirQR');    
-    const modalQR = document.getElementById('modalQR');
-    const cerrarQR = document.getElementById('cerrarQR');
   
-    abrirQR.addEventListener('click', (e) => {
-      e.preventDefault();
-      modalQR.style.display = 'block';
-    });
-  
-    cerrarQR.addEventListener('click', () => {
-      modalQR.style.display = 'none';
-    });
-  
-    window.addEventListener('click', (e) => {
-      if (e.target === modalQR) {
-        modalQR.style.display = 'none';
-      }
-    });
-    
-    // Abrir modal
-    document.querySelectorAll('.box').forEach(box => {
-      box.addEventListener('click', () => {
-        const modalId = box.getAttribute('data-modal');
-        const modal = document.getElementById(modalId);
-        if (modal) modal.style.display = 'flex';
+    // --- MODALES GENERALES ---
+      document.querySelectorAll('.box').forEach(box => {
+        box.addEventListener('click', () => {
+          const modalId = box.getAttribute('data-modal');
+          const modal = document.getElementById(modalId);
+          if (modal) modal.style.display = 'flex';
+        });
       });
-    });
-  
-    // Cerrar modal al hacer clic en la X
-    document.querySelectorAll('.close').forEach(btn => {
-      btn.addEventListener('click', () => {
-        btn.closest('.modal').style.display = 'none';
+    
+      document.querySelectorAll('.close').forEach(btn => {
+        btn.addEventListener('click', () => {
+          btn.closest('.modal').style.display = 'none';
+        });
       });
-    });
-  
-    // Cerrar modal al hacer clic fuera del contenido
-    window.addEventListener('click', (e) => {
-      if (e.target.classList.contains('modal')) {
-        e.target.style.display = 'none';
-      }
-    });    
+    
+      window.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal')) {
+          e.target.style.display = 'none';
+        }
+      });
+    
+      // --- MODAL QR ---
+      const modalQR = document.getElementById('modal-qr');
+      const abrirQR = document.getElementById('abrirQR');
+    
+      abrirQR.addEventListener('click', (e) => {
+        e.preventDefault();
+        modalQR.style.display = 'flex';
+      });  
   </script>
 </body>
 </html>
