@@ -79,19 +79,20 @@
       grid-column: 1;
       grid-row: 1;
     }
-    #orientacion .section-title { background-color: #e3cd66; }
+    #orientacion .section-title { 
+      background: linear-gradient(135deg, #e3cd66, #7fd6d6); }
 
     #migrantes {
       grid-column: 2;
       grid-row: 1;
     }
-    #migrantes .section-title { background-color: #a5cca0; }
+    #migrantes .section-title { background: linear-gradient(135deg, #a5cca0, #7fd6d6); }
 
     #empresas {
       grid-column: 1 / span 2; /* ocupa las dos columnas */
       grid-row: 2;
     }
-    #empresas .section-title { background-color: #77b5c3; }
+    #empresas .section-title { background: linear-gradient(135deg, #77b5c3, #7fd6d6); }
 
 
     /* Diagram dentro del bloque de orientación */
@@ -142,21 +143,20 @@
     
     .section-title {
       color: #ffffff;
-      background: linear-gradient(135deg, #5cb6f9, #7fd6d6);
-      font-weight: 600;
+      font-weight: 600; 
       text-align: center;
       padding: 0.5rem 0; /* altura del “título” */
       border-radius: 5px 5px 0 0; /* bordes redondeados solo arriba */
       width: 100%;
       display: block;      
       margin-bottom: 1.5rem; /* separa este div del que está debajo */
-      font-size: 1.8rem;
+      font-size: 1.0rem;
       text-align: center;
       border-radius: 12px;
       letter-spacing: 0.5px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);      
     }
-    
+   
     .grid-imagenes {
       display: grid;
       grid-template-columns: repeat(2, 1fr); /* 2 columnas iguales */
