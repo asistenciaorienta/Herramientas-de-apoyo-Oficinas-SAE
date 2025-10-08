@@ -607,17 +607,33 @@
   </div>
   
   <script>
+<script>
     function enviarCorreo() {
-      const sugerencia = encodeURIComponent(document.getElementById('sugerencia').value);
-      const consulta = encodeURIComponent(document.getElementById('consulta').value);
+      const sugerencia = document.getElementById('sugerencia').value.trim();
+      const consulta = document.getElementById('consulta').value.trim();
+    
+      let cuerpo = "";
+    
+      if (sugerencia) {
+        cuerpo += "🛠️ Sugerencia:\n" + sugerencia + "\n\n";
+      }
+    
+      if (consulta) {
+        cuerpo += "❓ Consulta:\n" + consulta + "\n\n";
+      }
+    
+      if (!cuerpo) {
+        alert("Por favor, escribe una sugerencia o una consulta antes de enviar.");
+        return;
+      }
     
       const destinatario = "asistenciaorienta.gr.sae@juntadeandalucia.es";
       const asunto = "Herramientas de Apoyo para Personal SAE: Sugerencia / Consulta";
-      const cuerpo = `🛠️ Sugerencia:\n${sugerencia}\n\n❓ Consulta:\n${consulta}`;
     
-      const mailtoLink = `mailto:${destinatario}?subject=${encodeURIComponent(asunto)}&body=${cuerpo}`;
+      const mailtoLink = `mailto:${destinatario}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
       window.location.href = mailtoLink;
     }
+    </script>
     
     function getBlockPosition(block) {
       return {
