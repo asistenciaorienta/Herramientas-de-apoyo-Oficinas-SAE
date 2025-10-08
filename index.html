@@ -337,6 +337,37 @@
       color: #000;
     }
     
+    .buscador {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .buscador input {
+      padding: 0.4rem 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    
+    .buscador button {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #087021;
+      transition: transform 0.2s ease;
+    }
+    
+    .buscador button:hover {
+      transform: scale(1.2);
+    }
+    
   </style>
 </head>
 <body>
@@ -345,6 +376,12 @@
          alt="Logo Servicio Andaluz de Empleo. Junta de Andalucía" 
          class="logo-sae">
     <h1>Herramientas de Apoyo para Personal SAE</h1>
+    <div class="buscador">
+      <input type="text" placeholder="Buscar..." aria-label="Buscar">
+      <button aria-label="Buscar">
+        🔍
+      </button>
+    </div>    
   </header>
   <main>
     <!-- 🟢 BLOQUE: PROCESO DE ORIENTACIÓN -->
