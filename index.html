@@ -39,21 +39,23 @@
       display: flex;
       align-items: center;       /* Centra verticalmente */
       justify-content: center;        /* Centra el texto en toda la cabecera */
-      background-color: #f5f5f5;
+      background-color: #fff; /* f5f5f5 */
       color: #087021; /* Fondo verde institucional */
       padding: 1rem 2rem; /* padding: 1rem 0; */
+      margin: 
     }
 
     header::after {
       content: "";
       position: absolute;
-      bottom: 0;
       left: 0;
-      height: 16px;
+      bottom: -16px; /* lo empuja fuera del header */
+      height: 24px;   /* más alto para que se vea bien */
       width: 100%;
       background: linear-gradient(to right, #e9d87c, #78a579);
+      z-index: 0; /* detrás del contenido */
     }
-    
+
     header img.logo-sae {
       position: absolute; 
       max-height: 60px;          /* Controla la altura máxima del logo */
