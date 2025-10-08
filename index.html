@@ -592,14 +592,14 @@
     <div class="modal-content">
       <span class="close" onclick="document.getElementById('modal-contacto').style.display='none'">&times;</span>
       <h2>Contacto</h2>
-      <form>
+      <form id="formulario-contacto" onsubmit="enviarCorreo(); return false;">
         <fieldset>
           <legend>Sugerencias de nuevas herramientas</legend>
-          <textarea placeholder="Describe tu propuesta..." rows="4" required></textarea>
+          <textarea id="sugerencia" placeholder="Describe tu propuesta..." rows="4" required></textarea>
         </fieldset>
         <fieldset>
           <legend>Consultas o dudas</legend>
-          <textarea placeholder="Escribe tu pregunta..." rows="4" required></textarea>
+          <textarea id="consulta" placeholder="Escribe tu pregunta..." rows="4" required></textarea>
         </fieldset>
         <button type="submit">Enviar</button>
       </form>
@@ -607,6 +607,18 @@
   </div>
   
   <script>
+    function enviarCorreo() {
+      const sugerencia = encodeURIComponent(document.getElementById('sugerencia').value);
+      const consulta = encodeURIComponent(document.getElementById('consulta').value);
+    
+      const destinatario = "asistenciaorienta.gr.sae@juntadeandalucia.es";
+      const asunto = "Herramientas de Apoyo para Personal SAE: Sugerencia / Consulta";
+      const cuerpo = `🛠️ Sugerencia:\n${sugerencia}\n\n❓ Consulta:\n${consulta}`;
+    
+      const mailtoLink = `mailto:${destinatario}?subject=${encodeURIComponent(asunto)}&body=${cuerpo}`;
+      window.location.href = mailtoLink;
+    }
+    
     function getBlockPosition(block) {
       return {
         left: block.offsetLeft,
