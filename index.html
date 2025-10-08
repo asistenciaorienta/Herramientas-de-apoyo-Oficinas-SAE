@@ -77,17 +77,65 @@
       color: #e3cd66;
     }
 
-    footer {
-      background-color: #555555;
-      color: #ffffff;
-      text-align: center;
-      padding: 1rem 1rem;
-      margin-top: auto;
-      font-size: 1rem;
+    footer .contacto-btn {
+      margin-left: 1rem;
+      background-color: #e9d87c;
+      color: #333;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    footer .contacto-btn:hover {
+      background-color: #d8c56a;
+    }
+    
+    #modal-contacto .modal-content form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    #modal-contacto fieldset {
+      border: none;
+      padding: 0;
+    }
+    
+    #modal-contacto legend {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #087021;
+    }
+    
+    #modal-contacto textarea {
       width: 100%;
-      align-self: stretch; /* asegura que el flex hijo se estire */
+      padding: 0.6rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-family: inherit;
+      resize: vertical;
+    }
+    
+    #modal-contacto button[type="submit"] {
+      background-color: #087021;
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      align-self: center;
+      transition: background 0.3s ease;
+    }
+    
+    #modal-contacto button[type="submit"]:hover {
+      background-color: #065c1a;
     }
 
+    
     main {
       flex: 1;
       display: grid;
@@ -368,6 +416,10 @@
       transform: scale(1.2);
     }
     
+    .buscador button svg {
+      fill: #087021;
+    }
+    
   </style>
 </head>
 <body>
@@ -521,8 +573,29 @@
     
   </main>
 
-  <footer>© 2025 - Servicio Andaluz de Empleo. Junta de Andalucía</footer>
+  <footer>
+    © 2025 - Servicio Andaluz de Empleo. Junta de Andalucía
+    <button class="contacto-btn" onclick="document.getElementById('modal-contacto').style.display='flex'">Contacto</button>
+  </footer>
 
+  <div id="modal-contacto" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="document.getElementById('modal-contacto').style.display='none'">&times;</span>
+      <h2>Contacto</h2>
+      <form>
+        <fieldset>
+          <legend>Sugerencias de nuevas herramientas</legend>
+          <textarea placeholder="Describe tu propuesta..." rows="4" required></textarea>
+        </fieldset>
+        <fieldset>
+          <legend>Consultas o dudas</legend>
+          <textarea placeholder="Escribe tu pregunta..." rows="4" required></textarea>
+        </fieldset>
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+  
   <script>
     function getBlockPosition(block) {
       return {
