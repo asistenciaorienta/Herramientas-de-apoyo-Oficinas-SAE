@@ -21,6 +21,11 @@
       font-weight: 700;
       font-style: normal;
     }
+    
+    html, body {
+      height: 100%;
+      overflow: hidden; /* ✅ evita scroll */
+    }
 
     body {
       font-family: "Montserrat", "Segoe UI", sans-serif;
@@ -86,7 +91,10 @@
       font-size: 1rem;
       width: 100%;
       align-self: stretch; /* asegura que el flex hijo se estire */
-    }
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }   
     footer .contacto-btn {
       margin-left: 1rem;
       background-color: #e9d87c;
@@ -150,8 +158,11 @@
       display: grid;
       grid-template-columns: 2fr 1fr; /* izquierda más ancha que derecha */
       grid-template-rows: auto auto; /* fila superior e inferior */
-      gap: 2rem;
-      padding: 2rem;
+      gap: 1rem;
+      padding: 1rem;
+      overflow: auto; /* permite scroll interno si hiciera falta */
+      height: calc(100vh - 160px); /* 100% alto pantalla menos header + footer */
+      box-sizing: border-box;
     }
 
     /* Bloques principales */
@@ -527,11 +538,11 @@
           </a>
           <p style="font-size: 0.85em;"><b>Guía Interactiva</b> de Empleo.<br>Personas Migrantes en Andalucía.</p>
           <!-- Enlace para abrir QR -->
-          <p>
+          <p style="font-size: 0.85em;">
             <a href="#" id="abrirQR" style="color: #2a6db3; text-decoration: underline; cursor: pointer;">
-              <p style="font-size: 0.85em;">📱 QR para personas usuarias </p>
+              📱 QR para personas usuarias
             </a>
-          </p>  
+          </p>
         </div>
     
         <div>
