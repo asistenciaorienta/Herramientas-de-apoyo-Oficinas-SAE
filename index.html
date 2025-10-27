@@ -443,6 +443,74 @@
     .buscador button svg {
       fill: #087021;
     }
+
+    /* 🟦 Bloque Empresas - Proceso */
+    #proceso-empresas {
+      grid-column: 1 / span 2;
+      grid-row: 3;
+    }
+    #proceso-empresas .section-title {
+      background: linear-gradient(135deg, #c1e3e9, #e6f7fa);
+    }
+    
+    /* Diagrama de empresas */
+    #diagram-empresas {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: 2rem;
+      justify-items: center;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      max-width: 100vw;
+      overflow: hidden;
+      padding: 0 1vw;
+      margin: 2vh auto 0;
+    }
+    
+    /* Cajas del proceso con empresas */
+    #contacto {
+      background: #087021;
+      grid-column: 1;
+      grid-row: 1;
+    }
+    #informacion {
+      background: #a5cca0;
+      color: #333;
+      grid-column: 2;
+      grid-row: 2;
+    }
+    #ofertas {
+      background: #e3cd66;
+      color: #333;
+      grid-column: 2;
+      grid-row: 1;
+    }
+    #seguimiento {
+      background: #77b5c3;
+      grid-column: 3;
+      grid-row: 1 / span 2;
+    }
+    
+    /* Flechas SVG para empresas */
+    #diagram-empresas svg.arrows {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+    #diagram-empresas path {
+      stroke: #333;
+      stroke-width: 2;
+      fill: none;
+    }
+    
+    /* Modal específico para empresas */
+    .modal-empresas .modal-content {
+      border-top: 16px solid #2a6db3;
+    }
     
   </style>
 </head>
@@ -591,6 +659,60 @@
         <p style="margin-top: 10px;">Escanea este código para acceder directamente a la Guía Interactiva de Empleo para personas migrantes.</p>
       </div>
     </div>
+
+    <section id="proceso-empresas" class="section">
+      <div class="section-title">Proceso con Empresas</div>
+      <div class="diagram" id="diagram-empresas">
+        <div class="box" id="contacto" data-modal="modal-contacto">Contacto /<br>Prospección</div>
+        <div class="box" id="informacion" data-modal="modal-informacion">Información y/o<br>Asesoramiento</div>
+        <div class="box" id="ofertas" data-modal="modal-ofertas">Gestión de<br>Ofertas</div>
+        <div class="box" id="seguimiento" data-modal="modal-seguimiento">Seguimiento y<br>Fidelización</div>
+    
+        <svg class="arrows">
+          <use href="#arrowhead" />
+          <line x1="100" y1="50" x2="300" y2="50" marker-end="url(#arrowhead)" stroke="#333" stroke-width="2"/>
+          <line x1="100" y1="50" x2="300" y2="150" marker-end="url(#arrowhead)" stroke="#333" stroke-width="2"/>
+          <line x1="300" y1="50" x2="500" y2="100" marker-end="url(#arrowhead)" stroke="#333" stroke-width="2"/>
+          <line x1="300" y1="150" x2="500" y2="100" marker-end="url(#arrowhead)" stroke="#333" stroke-width="2"/>
+        </svg>
+      </div>
+    </section>
+    <!-- Modal Contacto / Prospección -->
+    <div id="modal-contacto" class="modal modal-verde">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Contacto / Prospección</h2>
+        <p>Primer acercamiento a la empresa para identificar necesidades y establecer una relación inicial.</p>
+      </div>
+    </div>
+    
+    <!-- Modal Información / Asesoramiento -->
+    <div id="modal-informacion" class="modal modal-azul">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Información y/o Asesoramiento</h2>
+        <p>Se proporciona información sobre servicios, programas y recursos disponibles para la empresa.</p>
+      </div>
+    </div>
+    
+    <!-- Modal Gestión de Ofertas -->
+    <div id="modal-ofertas" class="modal modal-naranja">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Gestión de Ofertas</h2>
+        <p>Se formalizan las ofertas de empleo y se inicia el proceso de intermediación laboral.</p>
+      </div>
+    </div>
+    
+    <!-- Modal Seguimiento y Fidelización -->
+    <div id="modal-seguimiento" class="modal modal-morado">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Seguimiento y Fidelización</h2>
+        <p>Se mantiene el contacto con la empresa para evaluar resultados y fomentar futuras colaboraciones.</p>
+      </div>
+    </div>
+
     
     <!-- 🟦 Bloque Empresas -->
     <section id="empresas" class="section">
