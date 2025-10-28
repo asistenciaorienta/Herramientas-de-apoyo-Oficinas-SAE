@@ -513,7 +513,14 @@
     .modal-empresas .modal-content {
       border-top: 16px solid #2a6db3;
     }
-    
+    #diagram-empresas svg.arrows {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }    
   </style>
 </head>
 <body>
@@ -581,7 +588,6 @@
     </div>
   </div>
 </div>
-
     
     <!-- 🟨 Modal Servicios Puntuales -->
     <div id="modal-puntuales" class="modal modal-amarillo">
@@ -670,6 +676,14 @@
         <div class="box" id="informacion" data-modal="modal-informacion">Información y/o<br>Asesoramiento</div>
         <div class="box" id="ofertas" data-modal="modal-ofertas">Gestión de<br>Ofertas</div>
         <div class="box" id="seguimiento" data-modal="modal-seguimiento">Seguimiento y<br>Fidelización</div>
+        <svg class="arrows">
+          <defs>
+            <marker id="arrowhead" markerWidth="12" markerHeight="8"
+                    refX="12" refY="4" orient="auto" markerUnits="strokeWidth">
+              <polygon points="0 0, 12 4, 0 8" fill="#333" />
+            </marker>
+          </defs>
+        </svg>        
       </div>
     </section>
 
@@ -882,6 +896,36 @@
         e.preventDefault();
         modalQR.style.display = 'flex';
       });  
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const svg = document.querySelector("#diagram-empresas svg");
+      
+        function conectar(caja1, caja2) {
+          const r1 = caja1.getBoundingClientRect();
+          const r2 = caja2.getBoundingClientRect();
+          const svgRect = svg.getBoundingClientRect();
+      
+          const x1 = r1.right - svgRect.left;
+          const y1 = r1.top + r1.height/2 - svgRect.top;
+          const x2 = r2.left - svgRect.left;
+          const y2 = r2.top + r2.height/2 - svgRect.top;
+      
+          const line = document.createElementNS("http://www.w3.org/2000/svg","line");
+          line.setAttribute("x1", x1);
+          line.setAttribute("y1", y1);
+          line.setAttribute("x2", x2);
+          line.setAttribute("y2", y2);
+          line.setAttribute("stroke", "#333");
+          line.setAttribute("stroke-width", "2");
+          line.setAttribute("marker-end", "url(#arrowhead)");
+          svg.appendChild(line);
+        }
+      
+        conectar(document.getElementById("contacto"), document.getElementById("informacion"));
+        conectar(document.getElementById("informacion"), document.getElementById("ofertas"));
+        conectar(document.getElementById("ofertas"), document.getElementById("seguimiento"));
+      });
+  
       function conectar(caja1, caja2, svg) {
         const r1 = caja1.getBoundingClientRect();
         const r2 = caja2.getBoundingClientRect();
@@ -907,6 +951,12 @@
       conectar(document.getElementById("contacto"), document.getElementById("informacion"), svg);
       conectar(document.getElementById("informacion"), document.getElementById("ofertas"), svg);
       conectar(document.getElementById("ofertas"), document.getElementById("seguimiento"), svg);    
+
+      window.addEventListener("resize", () => {
+        const svg = document.querySelector("#diagram-empresas svg");
+        svg.innerHTML = '<defs> ... </defs>'; // vuelves a meter el marker
+        // y vuelves a llamar a conectar(...)
+      });    
   </script>
 </body>
 </html>
