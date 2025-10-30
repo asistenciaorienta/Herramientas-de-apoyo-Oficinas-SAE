@@ -534,6 +534,7 @@
       text-align: center;
     }
 
+    
     /* --- Estilo base del box tipo diana --- */
     .box.diana {
       position: relative;
@@ -541,10 +542,18 @@
       align-items: center;
       justify-content: center;
       background: none;
-      border: none;
+      border: 3px solid #009639; /* Verde SAE */
+      border-radius: 50%;        /* 🔵 Hace el box circular */
       width: 130px;
       height: 130px;
       cursor: pointer;
+      overflow: hidden;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+    
+    .box.diana:hover {
+      transform: scale(1.05);
     }
     
     /* --- Texto centrado sobre la diana --- */
@@ -559,14 +568,15 @@
       color: #222;
       z-index: 2;
       line-height: 1.1;
+      text-shadow: 0 0 4px white, 0 0 6px white; /* 💡 Sombra blanca */
       pointer-events: none; /* evita bloquear el clic al modal */
     }
     
     /* --- Diana --- */
     .target {
       position: relative;
-      width: 100px;
-      height: 100px;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
       animation: pulse 2.5s ease-in-out infinite;
     }
@@ -597,10 +607,11 @@
     
     /* --- Animación de pulsación --- */
     @keyframes pulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.07); opacity: 0.9; }
-      100% { transform: scale(1); opacity: 1; }
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+      50% { transform: translate(-50%, -50%) scale(1.07); opacity: 0.9; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
     }
+
 
 
     
