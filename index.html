@@ -591,7 +591,8 @@
     .circle.outer {
       width: 100%;
       height: 100%;
-      background: #009639; /* Verde SAE institucional */
+      background: #087021; /* Verde SAE institucional */      
+      border: 1px solid #009639;
     }
     .circle.white {
       width: 70%;
@@ -601,7 +602,8 @@
     .circle.inner {
       width: 40%;
       height: 40%;
-      background: #009639; /* Verde SAE institucional */
+      background: #087021; /* Verde SAE institucional */      
+      border: 1px solid #009639;
     }
 
     .circle.center {
@@ -957,7 +959,7 @@
       svg.setAttribute("width", container.offsetWidth);
       svg.setAttribute("height", container.offsetHeight);
       svg.setAttribute("viewBox", `0 0 ${container.offsetWidth} ${container.offsetHeight}`);
-    
+    // Flechas verticales → sin punta, horizontales → con punta
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("puntuales"), 'top-right', 'left', false);
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("objetivo"), 'right', 'left', true);
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("profundidad"), 'bottom-right', 'left', false);
@@ -975,7 +977,7 @@
       svg.setAttribute("width", container.offsetWidth);
       svg.setAttribute("height", container.offsetHeight);
       svg.setAttribute("viewBox", `0 0 ${container.offsetWidth} ${container.offsetHeight}`);
-    
+    // Flechas verticales → sin punta, horizontales → con punta
       drawArrow(svg, document.getElementById("contacto"), document.getElementById("informacion"), 'top-right', 'left', false);
       drawArrow(svg, document.getElementById("contacto"), document.getElementById("ofertas"), 'bottom-right', 'left', false);
       drawArrow(svg, document.getElementById("informacion"), document.getElementById("seguimiento"), 'right', 'top-left', false);
