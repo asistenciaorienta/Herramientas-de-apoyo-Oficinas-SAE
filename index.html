@@ -955,7 +955,11 @@
       const svg = document.querySelector("#diagram svg.arrows");
       const container = document.getElementById("diagram");
     
-      svg.innerHTML = `<defs>...</defs>`; // igual que antes
+      svg.innerHTML = `<defs>
+        <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto" markerUnits="strokeWidth">
+          <polygon points="0 0, 12 4, 0 8" fill="#333" />
+        </marker>
+      </defs>`;
       svg.setAttribute("width", container.offsetWidth);
       svg.setAttribute("height", container.offsetHeight);
       svg.setAttribute("viewBox", `0 0 ${container.offsetWidth} ${container.offsetHeight}`);
@@ -973,7 +977,11 @@
       const svg = document.querySelector("#diagram-empresas svg.arrows");
       const container = document.getElementById("diagram-empresas");
     
-      svg.innerHTML = `<defs>...</defs>`; // igual que antes
+      svg.innerHTML = `<defs>
+        <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto" markerUnits="strokeWidth">
+          <polygon points="0 0, 12 4, 0 8" fill="#333" />
+        </marker>
+      </defs>`;
       svg.setAttribute("width", container.offsetWidth);
       svg.setAttribute("height", container.offsetHeight);
       svg.setAttribute("viewBox", `0 0 ${container.offsetWidth} ${container.offsetHeight}`);
