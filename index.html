@@ -533,7 +533,6 @@
       border: none;
       text-align: center;
     }
-
     
     /* --- Estilo base del box tipo diana --- */
     .box.diana {
@@ -542,13 +541,13 @@
       align-items: center;
       justify-content: center;
       background: none;
-      border: 3px solid #009639; /* Verde SAE */
-      border-radius: 50%;        /* 🔵 Hace el box circular */
+      border: 2px solid #009639; /* Verde SAE */
+      border-radius: 10px;        /* 🔷 mantiene el formato cuadrado */
       width: 130px;
       height: 130px;
       cursor: pointer;
       overflow: hidden;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      box-shadow: 0 0 6px rgba(0,0,0,0.1);
       transition: transform 0.2s ease;
     }
     
@@ -568,8 +567,8 @@
       color: #222;
       z-index: 2;
       line-height: 1.1;
-      text-shadow: 0 0 4px white, 0 0 6px white; /* 💡 Sombra blanca */
-      pointer-events: none; /* evita bloquear el clic al modal */
+      text-shadow: 0 0 3px white, 0 0 6px white; /* 💡 sombra blanca para legibilidad */
+      pointer-events: none; /* no bloquea clics */
     }
     
     /* --- Diana --- */
@@ -577,7 +576,6 @@
       position: relative;
       width: 100%;
       height: 100%;
-      border-radius: 50%;
       animation: pulse 2.5s ease-in-out infinite;
     }
     
@@ -589,29 +587,26 @@
       transform: translate(-50%, -50%);
     }
     
-    .circle.red {
-      background: #009639; /* Verde SAE institucional */
-    }
-    
-    .circle.white {
-      background: white;
+    /* --- Solo dos círculos --- */
+    .circle.outer {
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 150, 57, 0.15); /* verde suave translúcido */
       border: 2px solid #009639;
     }
     
-    /* Tamaños de los anillos */
-    .circle:nth-child(1) { width: 100%; height: 100%; }
-    .circle:nth-child(2) { width: 80%; height: 80%; }
-    .circle:nth-child(3) { width: 60%; height: 60%; }
-    .circle:nth-child(4) { width: 40%; height: 40%; }
-    .circle.center { width: 20%; height: 20%; }
-    
-    /* --- Animación de pulsación --- */
-    @keyframes pulse {
-      0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-      50% { transform: translate(-50%, -50%) scale(1.07); opacity: 0.9; }
-      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    .circle.inner {
+      width: 25%;
+      height: 25%;
+      background: #009639; /* punto central verde */
     }
-
+    
+    /* --- Animación de pulsación suave --- */
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.95; }
+      100% { transform: scale(1); opacity: 1; }
+    }
 
 
     
@@ -644,11 +639,8 @@
         <div class="box diana" id="objetivo" data-modal="modal-objetivo">
           <div class="label">Objetivo <br>Profesional</div>
           <div class="target">
-            <div class="circle red"></div>
-            <div class="circle white"></div>
-            <div class="circle red"></div>
-            <div class="circle white"></div>
-            <div class="circle red center"></div>
+            <div class="circle outer"></div>
+            <div class="circle inner"></div>
           </div>
         </div>
 
