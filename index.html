@@ -536,28 +536,30 @@
 
     /* --- Estilo base del box tipo diana --- */
     .box.diana {
+      position: relative;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       background: none;
       border: none;
       width: 130px;
-      height: 150px;
-      position: relative;
+      height: 130px;
       cursor: pointer;
     }
     
-    /* --- Texto sobre la diana --- */
+    /* --- Texto centrado sobre la diana --- */
     .box.diana .label {
       position: absolute;
-      top: 12%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       text-align: center;
       font-weight: bold;
       font-size: 0.95rem;
       color: #222;
       z-index: 2;
       line-height: 1.1;
+      pointer-events: none; /* evita bloquear el clic al modal */
     }
     
     /* --- Diana --- */
@@ -599,6 +601,7 @@
       50% { transform: scale(1.07); opacity: 0.9; }
       100% { transform: scale(1); opacity: 1; }
     }
+
 
     
   </style>
