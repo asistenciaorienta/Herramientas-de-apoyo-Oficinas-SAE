@@ -591,15 +591,22 @@
     .circle.outer {
       width: 100%;
       height: 100%;
-      background: rgba(0, 150, 57, 0.15); /* verde suave translúcido */
+      background: #009639; /* Verde SAE institucional */
       border: 2px solid #009639;
     }
     
     .circle.inner {
-      width: 25%;
-      height: 25%;
-      background: #009639; /* punto central verde */
+      width: 40%;
+      height: 40%;
+      background: #009639; /* Verde SAE institucional */
+      border: 2px solid #009639;
     }
+
+    .circle.center {
+      width: 20%;
+      height: 20%;
+      background: #fff; /* blanco */
+    }    
     
     /* --- Animación de pulsación suave --- */
     @keyframes pulse {
@@ -641,6 +648,7 @@
           <div class="target">
             <div class="circle outer"></div>
             <div class="circle inner"></div>
+            <div class="circle center"></div>
           </div>
         </div>
 
