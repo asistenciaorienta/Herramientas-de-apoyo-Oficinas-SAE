@@ -522,6 +522,18 @@
       height: 100%;
       pointer-events: none;
     }    
+    
+    .diana-svg {
+      width: 100px;
+      height: 100px;
+    }
+    
+    #objetivo {
+      background: none;
+      border: none;
+      text-align: center;
+    }
+    
   </style>
 </head>
 <body>
@@ -547,7 +559,19 @@
         <div class="box" id="inicio" data-modal="modal-inicio">EOI<br>Entrevista Inicial <br> de Orientación</div>
         <div class="box" id="puntuales" data-modal="modal-puntuales">Servicios <br> Puntuales</div>
         <div class="box" id="profundidad" data-modal="modal-profundidad">Entrevista <br>en Profundidad</div>
-        <div class="box" id="objetivo" data-modal="modal-objetivo">Objetivo <br>Profesional</div>
+
+        <div class="box" id="objetivo" data-modal="modal-objetivo">
+          <svg viewBox="0 0 100 100" class="diana-svg">
+            <circle cx="50" cy="50" r="45" fill="#c0392b"/>
+            <circle cx="50" cy="50" r="35" fill="white"/>
+            <circle cx="50" cy="50" r="25" fill="#c0392b"/>
+            <circle cx="50" cy="50" r="15" fill="white"/>
+            <circle cx="50" cy="50" r="5" fill="#c0392b"/>
+          </svg>
+          <div class="label">Objetivo <br>Profesional</div>
+        </div>
+
+        <!--<div class="box" id="objetivo" data-modal="modal-objetivo">Objetivo <br>Profesional</div>-->     
         <div class="box" id="itinerario" data-modal="modal-itinerario">Diseño de <br> Itinerario</div>
         <div class="box" id="servicios" data-modal="modal-servicios">Desarrollo <br>de Servicios</div>
     
@@ -841,22 +865,15 @@
       svg.appendChild(path);
     }
 
-    function drawAllArrows() {
-      const svg = document.querySelector("svg.arrows");
+    function drawArrowsOrientacion() {
+      const svg = document.querySelector("#diagram svg.arrows");
       const container = document.getElementById("diagram");
-
-      // Limpiar flechas existentes
-      svg.innerHTML = `<defs>
-        <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto" markerUnits="strokeWidth">
-          <polygon points="0 0, 12 4, 0 8" fill="#333" />
-        </marker>
-      </defs>`;
-
+    
+      svg.innerHTML = `<defs>...</defs>`; // igual que antes
       svg.setAttribute("width", container.offsetWidth);
       svg.setAttribute("height", container.offsetHeight);
       svg.setAttribute("viewBox", `0 0 ${container.offsetWidth} ${container.offsetHeight}`);
-
-      // Flechas verticales → sin punta, horizontales → con punta
+    
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("puntuales"), 'top-right', 'left', false);
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("objetivo"), 'right', 'left', true);
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("profundidad"), 'bottom-right', 'left', false);
@@ -864,15 +881,31 @@
       drawArrow(svg, document.getElementById("profundidad"), document.getElementById("objetivo"), 'right', 'bottom-left', false);
       drawArrow(svg, document.getElementById("objetivo"), document.getElementById("itinerario"), 'right', 'left', true);
       drawArrow(svg, document.getElementById("itinerario"), document.getElementById("servicios"), 'right', 'left', true);
-      // Las de empresas
+    }
+    
+    function drawArrowsEmpresas() {
+      const svg = document.querySelector("#diagram-empresas svg.arrows");
+      const container = document.getElementById("diagram-empresas");
+    
+      svg.innerHTML = `<defs>...</defs>`; // igual que antes
+      svg.setAttribute("width", container.offsetWidth);
+      svg.setAttribute("height", container.offsetHeight);
+      svg.setAttribute("viewBox", `0 0 ${container.offsetWidth} ${container.offsetHeight}`);
+    
       drawArrow(svg, document.getElementById("contacto"), document.getElementById("informacion"), 'top-right', 'left', false);
       drawArrow(svg, document.getElementById("contacto"), document.getElementById("ofertas"), 'bottom-right', 'left', false);
       drawArrow(svg, document.getElementById("informacion"), document.getElementById("seguimiento"), 'right', 'top-left', false);
       drawArrow(svg, document.getElementById("ofertas"), document.getElementById("seguimiento"), 'right', 'bottom-left', false);
     }
-
+    
+    function drawAllArrows() {
+      drawArrowsOrientacion();
+      drawArrowsEmpresas();
+    }
+    
     window.addEventListener("load", drawAllArrows);
     window.addEventListener("resize", drawAllArrows);
+
   
     // --- MODALES GENERALES ---
       document.querySelectorAll('.box').forEach(box => {
