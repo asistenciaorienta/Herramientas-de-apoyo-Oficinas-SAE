@@ -2,16 +2,33 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <title>Herramientas de apoyo para personal SAE en Oficinas de Empleo</title>
   <style>
     /* Box-sizing global */
     *, *::before, *::after {
       box-sizing: border-box;
     }
+    @font-face {
+      font-family: 'Montserrat';
+      src: url('fonts/Montserrat-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
     
+    @font-face {
+      font-family: 'Montserrat';
+      src: url('fonts/Montserrat-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
+    
+    html, body {
+      height: 100%;
+      overflow: hidden; /* ✅ evita scroll */
+    }
+
     body {
-      font-family: "Poppins", "Segoe UI", sans-serif;
+      font-family: "Montserrat", "Segoe UI", sans-serif;
       background: #ffffff;
       line-height: 1.6;
       margin: 0;
@@ -27,11 +44,22 @@
       display: flex;
       align-items: center;       /* Centra verticalmente */
       justify-content: center;        /* Centra el texto en toda la cabecera */
-      background-color: #087021; /* Fondo verde institucional */
-      color: white;
+      background-color: #fff; /* f5f5f5 */
+      color: #087021; /* Fondo verde institucional */
       padding: 1rem 2rem; /* padding: 1rem 0; */
     }
-    
+
+    header::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -16px; /* lo empuja fuera del header */
+      height: 14px;   /* más alto para que se vea bien */
+      width: 100%;
+      background: linear-gradient(to right, #e9d87c, #78a579);
+      z-index: 0; /* detrás del contenido */
+    }
+
     header img.logo-sae {
       position: absolute; 
       max-height: 60px;          /* Controla la altura máxima del logo */
@@ -42,7 +70,7 @@
     
     header h1 {
       font-size: 2rem;
-      font-weight: 600;
+      font-weight: 800;
       margin: 0; /*margin: 0.3rem 0 0;*/
       text-align: center;
     }
@@ -53,7 +81,7 @@
       margin: 0.3rem 0 0;
       color: #e3cd66;
     }
-
+    
     footer {
       background-color: #555555;
       color: #ffffff;
@@ -63,15 +91,79 @@
       font-size: 1rem;
       width: 100%;
       align-self: stretch; /* asegura que el flex hijo se estire */
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 990; /* detrás del contenido */
+    }   
+    footer .contacto-btn {
+      margin-left: 1rem;
+      background-color: #e9d87c;
+      color: #333;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }    
+    footer .contacto-btn:hover {
+      background-color: #d8c56a;
     }
-
+    
+    #modal-contacto .modal-content form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    #modal-contacto fieldset {
+      border: none;
+      padding: 0;
+    }
+    
+    #modal-contacto legend {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #087021;
+    }
+    
+    #modal-contacto textarea {
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-family: inherit;
+      resize: vertical;
+    }
+    
+    #modal-contacto button[type="submit"] {
+      background-color: #087021;
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      align-self: center;
+      transition: background 0.3s ease;
+    }
+    
+    #modal-contacto button[type="submit"]:hover {
+      background-color: #065c1a;
+    }
+    
     main {
       flex: 1;
       display: grid;
       grid-template-columns: 2fr 1fr; /* izquierda más ancha que derecha */
       grid-template-rows: auto auto; /* fila superior e inferior */
-      gap: 2rem;
-      padding: 2rem;
+      gap: 1rem;
+      padding: 1rem;
+      overflow: auto; /* permite scroll interno si hiciera falta */
+      height: calc(100vh - 160px); /* 100% alto pantalla menos header + footer */
+      box-sizing: border-box;
+      margin-top: 1rem; /* 👈 añade espacio entre header y main */
     }
 
     /* Bloques principales */
@@ -110,7 +202,7 @@
       grid-row: 1;
     }
     #orientacion .section-title { 
-      background: linear-gradient(135deg, #e3cd66, #F5E784); }
+      background: linear-gradient(135deg, #087021, #F5E784); }
 
     #migrantes {
       grid-column: 2;
@@ -118,13 +210,22 @@
     }
     #migrantes .section-title { background: linear-gradient(135deg, #a5cca0, #D8F2D5); }
 
-    #empresas {
-      grid-column: 1 / span 2; /* ocupa las dos columnas */
+    #proceso-empresas {
+      grid-column: 1;
       grid-row: 2;
     }
-    #empresas .section-title { background: linear-gradient(135deg, #77b5c3, #ACDDE8); }
-
-
+    #proceso-empresas .section-title {
+      background: linear-gradient(135deg, #1c7bd6, #ACDDE8);
+    }
+    
+    #otras_herramientas {
+      grid-column: 2;
+      grid-row: 2;
+    }
+    #otras_herramientas .section-title {
+      background: linear-gradient(135deg, #d3d3d3, #f0f0f0);
+    }
+    
     /* Diagram dentro del bloque de orientación */
     .diagram {
       display: grid;
@@ -135,8 +236,10 @@
       align-items: center;
       position: relative;
       width: 100%;
-      max-width: none; /* se adapta al contenedor padre sin límite */
-      margin: 4rem auto auto 0;
+      max-width: 100vw; /* se adapta al contenedor padre sin límite */
+      overflow: hidden;
+      padding: 0 1vw;
+      margin: 2vh auto 0;
     }
 
     .box {
@@ -146,23 +249,25 @@
       font-weight: bold;
       text-align: center;
       box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-      width: 200px;
       position: relative;
       z-index: 1;
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      width: 18vw;
+      min-width: 150px;
+      max-width: 220px;
     }
-  
     .box:hover {
       transform: translateY(-5px);
       box-shadow: 0 6px 10px rgba(0,0,0,0.3);
     }    
 
-    #inicio { background: #087021; grid-column: 1; grid-row: 2; }
-    #puntuales { background: #e3cd66; color:#333; grid-column: 3; grid-row: 1; } /* color amarillo */
+    #inicio { background: #087021;                  grid-column: 1; grid-row: 2; } /* color verde junta */
+    #puntuales { background: #e3cd66; color:#333;   grid-column: 3; grid-row: 1; } /* color amarillo */
     #profundidad { background: #a5cca0; color:#333; grid-column: 3; grid-row: 3; } /* color verde claro */
-    #itinerario { background: #77b5c3; grid-column: 5; grid-row: 2; } /* color azul */
-    #servicios { background: #087021; grid-column: 7; grid-row: 2; }
+    #objetivo { background: #087021;                grid-column: 5; grid-row: 2; } /* color verde junta */
+    #itinerario { background: #77b5c3;              grid-column: 7; grid-row: 2; } /* color azul */
+    #servicios { background: #087021;               grid-column: 9; grid-row: 2; } /* color verde junta */
 
     svg.arrows {
       position: absolute;
@@ -184,7 +289,7 @@
       gap: 2rem; /* separación entre las imágenes */
       text-align: center; /* centra texto bajo la imagen */
       padding: 0.5rem;
-      margin: 3rem auto auto 0;
+      margin: 2vh auto 0;
     }
    
     .grid-imagenes img {
@@ -252,12 +357,14 @@
   
     /* 💬 Modal base */
     /* 🎨 Colores temáticos */
-    .modal-verde .modal-content { border-top: 6px solid #2e8b57; }
-    .modal-amarillo .modal-content { border-top: 6px solid #e8b300; }
-    .modal-azul .modal-content { border-top: 6px solid #1e90ff; }
-    .modal-naranja .modal-content { border-top: 6px solid #ff8c00; }
-    .modal-morado .modal-content { border-top: 6px solid #8a2be2; }
-    .modal-celeste .modal-content { border-top: 6px solid #00bcd4; }
+    .modal-verde .modal-content { border-top: 16px solid #2e8b57; }
+    .modal-amarillo .modal-content { border-top: 16px solid #e8b300; }
+    .modal-azul .modal-content { border-top: 16px solid #1e90ff; }
+    .modal-naranja .modal-content { border-top: 16px solid #ff8c00; }
+    .modal-morado .modal-content { border-top: 16px solid #8a2be2; }
+    .modal-celeste .modal-content { border-top: 16px solid #00bcd4; }
+    .modal-celeste2 .modal-content { border-top: 16px solid #00bcd6; }
+    .modal-gris .modal-content { border-top: 16px solid #333; }
     
     /* 🧩 Fondo atenuado */
     .modal {
@@ -278,7 +385,7 @@
     .modal-content {
       background: #fff;
       padding: 25px;
-      border-radius: 16px;
+      border-radius: 8px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
       max-width: 600px;
       width: 90%;
@@ -312,23 +419,245 @@
       color: #000;
     }
     
+    .buscador {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .buscador input {
+      padding: 0.4rem 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    
+    .buscador button {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #087021; /* verde institucional */
+      transition: transform 0.2s ease;
+    }
+    
+    .buscador button:hover {
+      transform: scale(1.2);
+    }
+    
+    .buscador button svg {
+      fill: #087021;
+    }
+
+    /* 🟦 Bloque Empresas - Proceso */
+    
+    /* Diagrama de empresas */
+    #diagram-empresas {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: 2rem;
+      justify-items: center;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      max-width: 100vw;
+      overflow: hidden;
+      padding: 0 1vw;
+      margin: 2vh auto 0;
+    }
+    
+    /* Cajas del proceso con empresas */
+    #contacto {
+      background: #087021;
+      grid-column: 1;
+      grid-row: 1 / span 2;
+    }
+    #ofertas {
+      background: #a5cca0;
+      color: #333;
+      grid-column: 2;
+      grid-row: 2;
+    }
+    #informacion {
+      background: #e3cd66;
+      color: #333;
+      grid-column: 2;
+      grid-row: 1;
+    }
+    #seguimiento {
+      background: #77b5c3;
+      grid-column: 3;
+      grid-row: 1 / span 2;
+    }
+    
+    /* Flechas SVG para empresas */
+    #diagram-empresas svg.arrows {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+    #diagram-empresas path {
+      stroke: #333;
+      stroke-width: 2;
+      fill: none;
+    }
+    
+    /* Modal específico para empresas */
+    .modal-empresas .modal-content {
+      border-top: 16px solid #2a6db3;
+    }
+    #diagram-empresas svg.arrows {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }    
+    
+    .diana-svg {
+      width: 100px;
+      height: 100px;
+    }
+    
+    #objetivo {
+      background: none;
+      border: none;
+      text-align: center;
+    }
+    
+    /* --- Estilo base del box tipo diana --- */
+    .box.diana {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: 2px solid #009639; /* Verde SAE */
+      border-radius: 10px;        /* 🔷 mantiene el formato cuadrado */
+      width: 130px;
+      height: 130px;
+      cursor: pointer;
+      overflow: hidden;
+      box-shadow: 0 0 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+    
+    .box.diana:hover {
+      transform: scale(1.05);
+    }
+    
+    /* --- Texto centrado sobre la diana --- */
+    .box.diana .label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-weight: bold;
+      font-size: 0.95rem;
+      color: #222;
+      z-index: 2;
+      line-height: 1.1;
+      text-shadow: 0 0 3px white, 0 0 6px white; /* 💡 sombra blanca para legibilidad */
+      pointer-events: none; /* no bloquea clics */
+    }
+    
+    /* --- Diana --- */
+    .target {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    /* --- Solo dos círculos --- */
+    .circle.outer {
+      width: 100%;
+      height: 100%;
+      background: #087021; /* Verde SAE institucional */      
+      border: 1px solid #009639;
+    }
+    .circle.white {
+      width: 70%;
+      height: 70%;
+      background: #fff; /* blanco */
+    }    
+    .circle.inner {
+      width: 40%;
+      height: 40%;
+      background: #087021; /* Verde SAE institucional */      
+      border: 1px solid #009639;
+    }
+
+    .circle.center {
+      width: 20%;
+      height: 20%;
+      background: #fff; /* blanco */
+    }    
+    
+    /* --- Animación de pulsación suave --- */
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.95; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+
+    
   </style>
 </head>
 <body>
   <header>
-    <img src="Imagenes/logo_blanco_transparente.png" 
+    <img src="Imagenes/SAE_Junta_de_Andalucia_Documentacion.png" 
          alt="Logo Servicio Andaluz de Empleo. Junta de Andalucía" 
          class="logo-sae">
-    <h1>Herramientas de apoyo para personal SAE</h1>
+    <h1>Herramientas de Apoyo para Personal SAE</h1>
+    <div class="buscador">
+      <input type="text" placeholder="Buscar..." aria-label="Buscar">
+      <button aria-label="Buscar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#087021" viewBox="0 0 24 24">
+          <path d="M10 2a8 8 0 105.293 14.293l5.707 5.707 1.414-1.414-5.707-5.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/>
+        </svg>
+      </button>
+    </div>    
   </header>
   <main>
-    <!-- 🟢 BLOQUE: PROCESO DE ORIENTACIÓN -->
+    <!-- 🟢 BLOQUE: PROCESO DE ORIENTACIÓN -------------------------------------------------------------------------------------->
     <section id="orientacion" class="section">
       <div class="section-title">Proceso de Orientación</div>
       <div class="diagram" id="diagram">
         <div class="box" id="inicio" data-modal="modal-inicio">EOI<br>Entrevista Inicial <br> de Orientación</div>
         <div class="box" id="puntuales" data-modal="modal-puntuales">Servicios <br> Puntuales</div>
         <div class="box" id="profundidad" data-modal="modal-profundidad">Entrevista <br>en Profundidad</div>
+
+        <div class="box diana" id="objetivo" data-modal="modal-objetivo">
+          <div class="label">Objetivo <br>Profesional</div>
+          <div class="target">
+            <div class="circle outer"></div>
+            <div class="circle white"></div>
+            <div class="circle inner"></div>
+            <div class="circle center"></div>
+          </div>
+        </div>
+
+        <!--<div class="box" id="objetivo" data-modal="modal-objetivo">Objetivo <br>Profesional</div>-->     
         <div class="box" id="itinerario" data-modal="modal-itinerario">Diseño de <br> Itinerario</div>
         <div class="box" id="servicios" data-modal="modal-servicios">Desarrollo <br>de Servicios</div>
     
@@ -343,14 +672,34 @@
     </section>
     
     <!-- 🟡 MODALES -->
-    <!-- 🟩 Modal EOI -->
-    <div id="modal-inicio" class="modal modal-verde">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Entrevista Inicial de Orientación</h2>
-        <p>Próximamente se incluirá aquí el contenido detallado de esta fase.</p>
-      </div>
+<!-- 🟩 Modal EOI -->
+<div id="modal-inicio" class="modal modal-verde">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Entrevista Inicial de Orientación</h2>
+
+    <p style="text-align: left; margin-bottom: 1.5rem;">
+      La Entrevista Inicial de Orientación es el primer contacto con la persona usuaria.
+      Permite conocer su situación, necesidades y expectativas para definir la mejor estrategia de atención.
+    </p>
+
+    <div style="text-align: left; margin-bottom: 1.5rem;">
+      <h3 style="color:#087021; margin-bottom:0.5rem;">📄 Documentación:</h3>
+      <ul style="margin: 0; padding-left: 1.2rem;">
+        <li><a href="docs/Guia_Entrevista_Inicial.pdf" target="_blank">Guía de la Entrevista Inicial</a></li>
+        <li><a href="docs/Plantilla_Registro_Entrevista.docx" target="_blank">Plantilla de registro de entrevista</a></li>
+      </ul>
     </div>
+
+    <div style="text-align: left;">
+      <h3 style="color:#087021; margin-bottom:0.5rem;">🛠️ Herramientas:</h3>
+      <ul style="margin: 0; padding-left: 1.2rem;">
+        <li><a href="herramientas/Cuestionario_Diagnostico.html" target="_blank">Cuestionario diagnóstico</a></li>
+        <li><a href="herramientas/Guia_Preguntas_Clave.pdf" target="_blank">Guía de preguntas clave</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
     
     <!-- 🟨 Modal Servicios Puntuales -->
     <div id="modal-puntuales" class="modal modal-amarillo">
@@ -399,22 +748,22 @@
                  alt="Guía Interactiva de Empleo. Personas Migrantes en Andalucía" 
                  style="max-width: 100%; height: auto; cursor: pointer;">
           </a>
-          <p>Guía Interactiva de Empleo.<br>Personas Migrantes en Andalucía.</p>
+          <p style="font-size: 0.85em;"><b>Guía Interactiva</b> de Empleo.<br>Personas Migrantes en Andalucía.</p>
           <!-- Enlace para abrir QR -->
-          <p>
+          <p style="font-size: 0.85em;">
             <a href="#" id="abrirQR" style="color: #2a6db3; text-decoration: underline; cursor: pointer;">
               📱 QR para personas usuarias
             </a>
-          </p>  
+          </p>
         </div>
     
         <div>
           <a href="https://asistenciaorienta.github.io/SituacionesAdministrativas/" target="_blank">
-            <img src="Imagenes/Ayuda_SILA_Migrantes.png" 
-                 alt="Ayuda para el registro en SILA de una persona migrante" 
-                 style="max-width: 100%; height: auto; cursor: pointer;">
+            <img src="Imagenes/Ayuda_SILA_Migrantes2.png" 
+                 alt="Registro en SILA de una persona extranjera" 
+                 style="max-width: 80%; height: auto; cursor: pointer;">
           </a>
-          <p>Ayuda para el <b>registro en SILA</b> de una persona migrante.</p>
+          <p style="font-size: 0.85em;"><b>Registro en SILA</b><br>de personas extranjeras</p>
         </div>
       </div>
     </section>
@@ -430,21 +779,124 @@
         <p style="margin-top: 10px;">Escanea este código para acceder directamente a la Guía Interactiva de Empleo para personas migrantes.</p>
       </div>
     </div>
-    
-    <!-- Bloque Empresas -->
-    <section id="empresas" class="section">
-      <div class="section-title">Gestión con Empresas</div>
-      <div>
-        <a href="https://chatgpt.com/g/g-68dcd5d94ab48191a6b5bdb9fd31c2f6-prueba-gpt-empresas" target="_blank">
-          Consultorio sobre Contratos y Convenios.
-        </a>
+   
+    <!-- 🟦 BLOQUE: EMPRESAS ------------------------------------------------------------------------------------>
+    <section id="proceso-empresas" class="section">    
+      <div class="section-title">Proceso con Empresas</div>
+      <div class="diagram" id="diagram-empresas">
+        <div class="box" id="contacto" data-modal="modal-contacto">Contacto /<br>Prospección</div>
+        <div class="box" id="informacion" data-modal="modal-informacion">Información y/o<br>Asesoramiento</div>
+        <div class="box" id="ofertas" data-modal="modal-ofertas">Gestión de<br>Ofertas</div>
+        <div class="box" id="seguimiento" data-modal="modal-seguimiento">Seguimiento y<br>Fidelización</div>
+        <svg class="arrows">
+          <defs>
+            <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto" markerUnits="strokeWidth">
+              <polygon points="0 0, 12 4, 0 8" fill="#333" />
+            </marker>
+          </defs>
+        </svg>        
       </div>
     </section>
+
+    <!-- Bloque Otras Herramientas -->
+    <section id="otras_herramientas" class="section">
+      <div class="section-title">Otras Herramientas Útiles</div>
+      <!-- Contenedor en 2 columnas -->
+      <div class="grid-imagenes">
+          <!-- Aquí puedes añadir contenido -->
+      </div>
+    </section>  
+    
+    <!-- Modal Contacto / Prospección -->
+    <div id="modal-contacto" class="modal modal-verde">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Contacto / Prospección</h2>
+        <p>Primer acercamiento a la empresa para identificar necesidades y establecer una relación inicial.</p>
+      </div>
+    </div>
+    
+    <!-- Modal Información / Asesoramiento -->
+    <div id="modal-informacion" class="modal modal-azul">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Información y/o Asesoramiento</h2>
+        <p>Se proporciona información sobre servicios, programas y recursos disponibles para la empresa.</p>
+      </div>
+    </div>
+    
+    <!-- Modal Gestión de Ofertas -->
+    <div id="modal-ofertas" class="modal modal-naranja">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Gestión de Ofertas</h2>
+        <p>Se formalizan las ofertas de empleo y se inicia el proceso de intermediación laboral.</p>
+      </div>
+    </div>
+    
+    <!-- Modal Seguimiento y Fidelización -->
+    <div id="modal-seguimiento" class="modal modal-morado">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Seguimiento y Fidelización</h2>
+        <p>Se mantiene el contacto con la empresa para evaluar resultados y fomentar futuras colaboraciones.</p>
+      </div>
+    </div>    
   </main>
 
-  <footer>© 2025 - Servicio Andaluz de Empleo. Junta de Andalucía</footer>
+  <footer style="position: relative; text-align: center; padding: 10px;">
+    © 2025 - Servicio Andaluz de Empleo. Junta de Andalucía
+    <button class="contacto-btn" onclick="document.getElementById('modal-contacto').style.display='flex'">Contacto</button>
+    <img src="Imagenes/vje2.png" 
+         style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 25px;">
+  </footer>
+
+
+  <div id="modal-contacto" class="modal modal-gris">
+    <div class="modal-content">
+      <span class="close" onclick="document.getElementById('modal-contacto').style.display='none'">&times;</span>
+      <h2>Contacto</h2>
+      <form id="formulario-contacto" onsubmit="enviarCorreo(); return false;">
+        <fieldset>
+          <legend>Sugerencias de nuevas herramientas</legend>
+          <textarea id="sugerencia" placeholder="Describe tu propuesta..." rows="4"></textarea>
+        </fieldset>
+        <fieldset>
+          <legend>Consultas o dudas</legend>
+          <textarea id="consulta" placeholder="Escribe tu pregunta..." rows="4"></textarea>
+        </fieldset>
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
 
   <script>
+    function enviarCorreo() {
+      const sugerencia = document.getElementById('sugerencia').value.trim();
+      const consulta = document.getElementById('consulta').value.trim();
+    
+      let cuerpo = "";
+    
+      if (sugerencia) {
+        cuerpo += "🛠️ Sugerencia:\n" + sugerencia + "\n\n";
+      }
+    
+      if (consulta) {
+        cuerpo += "❓ Consulta:\n" + consulta + "\n\n";
+      }
+    
+      if (!cuerpo) {
+        alert("Por favor, escribe una sugerencia o una consulta antes de enviar.");
+        return;
+      }
+    
+      const destinatario = "asistenciaorienta.gr.sae@juntadeandalucia.es";
+      const asunto = "Herramientas de Apoyo para Personal SAE: Sugerencia / Consulta";
+    
+      const mailtoLink = `mailto:${destinatario}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+      window.location.href = mailtoLink;
+    }
+    
     function getBlockPosition(block) {
       return {
         left: block.offsetLeft,
@@ -499,32 +951,55 @@
       svg.appendChild(path);
     }
 
-    function drawAllArrows() {
-      const svg = document.querySelector("svg.arrows");
+    function drawArrowsOrientacion() {
+      const svg = document.querySelector("#diagram svg.arrows");
       const container = document.getElementById("diagram");
-
-      // Limpiar flechas existentes
+    
       svg.innerHTML = `<defs>
         <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto" markerUnits="strokeWidth">
           <polygon points="0 0, 12 4, 0 8" fill="#333" />
         </marker>
       </defs>`;
-
       svg.setAttribute("width", container.offsetWidth);
       svg.setAttribute("height", container.offsetHeight);
       svg.setAttribute("viewBox", `0 0 ${container.offsetWidth} ${container.offsetHeight}`);
-
-      // Flechas verticales → sin punta, horizontales → con punta
+    // Flechas verticales → sin punta, horizontales → con punta
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("puntuales"), 'top-right', 'left', false);
-      drawArrow(svg, document.getElementById("inicio"), document.getElementById("itinerario"), 'right', 'left', true);
+      drawArrow(svg, document.getElementById("inicio"), document.getElementById("objetivo"), 'right', 'left', true);
       drawArrow(svg, document.getElementById("inicio"), document.getElementById("profundidad"), 'bottom-right', 'left', false);
-      drawArrow(svg, document.getElementById("puntuales"), document.getElementById("itinerario"), 'right', 'top-left', false);
-      drawArrow(svg, document.getElementById("profundidad"), document.getElementById("itinerario"), 'right', 'bottom-left', false);
+      drawArrow(svg, document.getElementById("puntuales"), document.getElementById("objetivo"), 'right', 'top-left', false);
+      drawArrow(svg, document.getElementById("profundidad"), document.getElementById("objetivo"), 'right', 'bottom-left', false);
+      drawArrow(svg, document.getElementById("objetivo"), document.getElementById("itinerario"), 'right', 'left', true);
       drawArrow(svg, document.getElementById("itinerario"), document.getElementById("servicios"), 'right', 'left', true);
     }
-
+    
+    function drawArrowsEmpresas() {
+      const svg = document.querySelector("#diagram-empresas svg.arrows");
+      const container = document.getElementById("diagram-empresas");
+    
+      svg.innerHTML = `<defs>
+        <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto" markerUnits="strokeWidth">
+          <polygon points="0 0, 12 4, 0 8" fill="#333" />
+        </marker>
+      </defs>`;
+      svg.setAttribute("width", container.offsetWidth);
+      svg.setAttribute("height", container.offsetHeight);
+      svg.setAttribute("viewBox", `0 0 ${container.offsetWidth} ${container.offsetHeight}`);
+    // Flechas verticales → sin punta, horizontales → con punta
+      drawArrow(svg, document.getElementById("contacto"), document.getElementById("informacion"), 'top-right', 'left', false);
+      drawArrow(svg, document.getElementById("contacto"), document.getElementById("ofertas"), 'bottom-right', 'left', false);
+      drawArrow(svg, document.getElementById("informacion"), document.getElementById("seguimiento"), 'right', 'top-left', false);
+      drawArrow(svg, document.getElementById("ofertas"), document.getElementById("seguimiento"), 'right', 'bottom-left', false);
+    }
+    
+    function drawAllArrows() {
+      drawArrowsOrientacion();
+      drawArrowsEmpresas();
+    }
+    
     window.addEventListener("load", drawAllArrows);
     window.addEventListener("resize", drawAllArrows);
+
   
     // --- MODALES GENERALES ---
       document.querySelectorAll('.box').forEach(box => {
@@ -555,6 +1030,8 @@
         e.preventDefault();
         modalQR.style.display = 'flex';
       });  
+
+
   </script>
 </body>
 </html>
