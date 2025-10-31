@@ -463,7 +463,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));/*grid-template-columns: repeat(4, 1fr);*/
       grid-template-rows: auto auto;
-      gap: 1.5rem; /*gap: 2rem;*/
+      gap: 2rem; /*gap: 2rem;*/
       justify-items: center;
       align-items: center;
       position: relative;
@@ -475,7 +475,9 @@
       justify-content: center; /* Centra el grid horizontalmente */
       width: fit-content;       /* Ajusta el ancho al contenido */      
     }
-    
+    #contacto, #ofertas, #informacion, #seguimiento {
+      margin: 0 1rem;
+    }
     /* Cajas del proceso con empresas */
     #contacto {
       background: #087021;
@@ -485,18 +487,18 @@
     #ofertas {
       background: #a5cca0;
       color: #333;
-      grid-column: 3;
+      grid-column: 2;
       grid-row: 2;
     }
     #informacion {
       background: #e3cd66;
       color: #333;
-      grid-column: 3;
+      grid-column: 2;
       grid-row: 1;
     }
     #seguimiento {
       background: #77b5c3;
-      grid-column: 5;
+      grid-column: 3;
       grid-row: 1 / span 2;
     }
     
