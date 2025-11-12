@@ -306,6 +306,9 @@
     .grid-imagenes img {
       border-radius: 12px;
       transition: transform 0.3s ease;
+      max-width: 120px;   /* limita ancho */
+      height: auto;       /* mantiene proporción */
+      display: block;
     }
 
     .grid-imagenes img:hover {
@@ -319,8 +322,16 @@
       background: white;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      justify-content: center;  /* centra horizontalmente */
+      align-items: center;      /* centra verticalmente */
+      flex-direction: row;      /* imagen y texto uno al lado del otro si quieres */
+      gap: 1rem;                /* espacio entre elementos dentro del cuadrito */
+      border: 1px solid #e0e0e0;
+      border-radius: 16px;
+      padding: 1rem;
     }
-
+  
     .grid-imagenes > div:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
