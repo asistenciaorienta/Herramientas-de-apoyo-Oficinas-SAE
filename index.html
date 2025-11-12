@@ -642,16 +642,15 @@
       50% { transform: scale(1.05); opacity: 0.95; }
       100% { transform: scale(1); opacity: 1; }
     }
-    /* ✅ Centrar contenido dentro del bloque Migrantes */
-    #migrantes {
-      display: flex;
-      align-items: center;     /* centra verticalmente */
-      justify-content: center; /* centra horizontalmente */
-    }
-    
-    #migrantes .grid-imagenes {
-      margin: 0;               /* elimina márgenes extra */
-    }
+#migrantes .grid-imagenes {
+  display: flex;
+  justify-content: center; /* centra horizontalmente */
+  align-items: center;     /* centra verticalmente */
+  flex-direction: column;  /* mantiene los elementos en columna si procede */
+  margin: 0 auto;          /* asegura el centrado si tiene ancho menor que el contenedor */
+  height: 100%;            /* usa la altura disponible del bloque */
+}
+
   
 </style>
 
