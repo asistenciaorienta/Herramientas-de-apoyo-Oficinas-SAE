@@ -174,3 +174,9 @@ footer {
   padding: 1rem;
   color: #333;
 }
+.grid-imagenes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 👈 3 columnas */
+  gap: 20px;
+  text-align: center;
+}
